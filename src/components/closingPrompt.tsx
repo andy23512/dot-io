@@ -1,9 +1,9 @@
-import React, { ReactElement, useEffect } from 'react';
+import type { Location } from 'history';
+import { ReactElement, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import store, { useStoreActions } from '../store/store';
 import { PromptBeforeClosing } from './promptBeforeClosing';
-import { useHistory } from 'react-router-dom';
 import { ROUTER_PATHS } from './router';
-import type { Location } from 'history';
 
 export function ClosingPrompt(): ReactElement {
   const history = useHistory();
@@ -21,7 +21,7 @@ export function ClosingPrompt(): ReactElement {
     );
     const isAutoWriteEnabled = store.getState().trainingSettings.isAutoWrite;
     if (didLeaveTrainingSession && isAutoWriteEnabled)
-      handleAutowriteData(true);
+      handleAutoWriteData(true);
   };
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function ClosingPrompt(): ReactElement {
     };
   }, []);
 
-  const handleAutowriteData = (isAutoWriteEnabled: boolean) => {
+  const handleAutoWriteData = (isAutoWriteEnabled: boolean) => {
     // The other way we save data is if the user exits out of the tab entirely, or refreshes the browser, which is done here, but again only if they have AutoWrite enabled
     if (isAutoWriteEnabled) {
       setStoredChordTrainingStats(store.getState().trainingStatistics);
@@ -40,5 +40,5 @@ export function ClosingPrompt(): ReactElement {
     }
   };
 
-  return <PromptBeforeClosing onClose={handleAutowriteData} />;
+  return <PromptBeforeClosing onClose={handleAutoWriteData} />;
 }

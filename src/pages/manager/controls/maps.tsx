@@ -1,5 +1,5 @@
 const _actionMap =
-    
+
    [
     'NUL', //0x00 0
     'CCFunc', //0x01 1
@@ -607,17 +607,17 @@ const _actionMap =
 ];
 
 const  CHARACHORDER = [
-    0x0000, // 0, 
+    0x0000, // 0,
     0x013E, // 1, mouse right button press-and-release
     ('!').charCodeAt(0), // 2, !
     0x0187, // 3, right gui
     0x003F, // 4, ?
-    0x0000, // 5, 
+    0x0000, // 5,
     ('b').charCodeAt(0), // 6, b
     ('q').charCodeAt(0), // 7, q
     0x0115, // 8, previous phrase
     ('x').charCodeAt(0), // 9, x
-    0x0000, //10, 
+    0x0000, //10,
     ('f').charCodeAt(0), //11, f
     ('d').charCodeAt(0), //12, d
     ('h').charCodeAt(0), //13, h
@@ -627,37 +627,37 @@ const  CHARACHORDER = [
     0x0113, //17, num-shift right
     0x0186, //18, alt right
     0x0185, //19, shift right
-    0x0000, //20, 
+    0x0000, //20,
     0x0149, //21, mouse left hand down
     0x014A, //22, mouse left hand right
     0x014B, //23, mouse left hand up
     0x014C, //24, mouse left hand left
-    0x0000, //25, 
+    0x0000, //25,
     ('s').charCodeAt(0), //26, s
     (';').charCodeAt(0), //27, ;
     0x0184, //28, ctrl right
     ('y').charCodeAt(0), //29, y
-    0x0000, //30, 
+    0x0000, //30,
     0x01A0, //31, arrow down
     0x019E, //32, arrow right
     0x01A1, //33, arrow up
     0x019F, //34, arrow left
-    0x0000, //35, 
+    0x0000, //35,
     ('n').charCodeAt(0), //36, n
     ('j').charCodeAt(0), //37, j
     0x0009, //38, tab horizontal
     ('l').charCodeAt(0), //39, l
-    0x0000, //40, 
+    0x0000, //40,
     ('t').charCodeAt(0), //41, t
     (' ').charCodeAt(0), //42,  (space)
     0x000A, //43, enter (line feed)
     ('a').charCodeAt(0), //44, a
-    0x0000, //45, 
+    0x0000, //45,
     ('/').charCodeAt(0), //46, /
     ('-').charCodeAt(0), //47, -
     0x0183, //48, left gui
     0x001B, //49, escape
-    0x0000, //50, 
+    0x0000, //50,
     ('w').charCodeAt(0), //51, w
     0x013D, //52, mouse left button press-and-release
     ('g').charCodeAt(0), //53, g
@@ -667,38 +667,38 @@ const  CHARACHORDER = [
     ('v').charCodeAt(0), //57, v
     ('m').charCodeAt(0), //58, m
     ('c').charCodeAt(0), //59, c
-    0x0000, //60, 
+    0x0000, //60,
     0x0110, //61, ambi throw left
     0x0181, //62, shift left
     0x0182, //63, alt left
     0x0110, //64, num-shift left
-    0x0000, //65, 
+    0x0000, //65,
     0x0149, //66, mouse right hand down
     0x014A, //67, mouse right hand right
     0x014B, //68, mouse right hand up
     0x014C, //69, mouse right hand left
-    0x0000, //70, 
+    0x0000, //70,
     ('u').charCodeAt(0), //71, u
     ('\\').charCodeAt(0), //72, \
     0x0180, //73, left ctrl
     (',').charCodeAt(0), //74, ,
-    0x0000, //75, 
+    0x0000, //75,
     0x01A0, //76, arrow down
     0x019E, //77, arrow right
     0x01A1, //78, arrow up
     0x019F, //79, arrow left
-    0x0000, //80, 
+    0x0000, //80,
     ('o').charCodeAt(0), //81, o
     ('i').charCodeAt(0), //82, i
     0x007F, //83, del forward
     ('.').charCodeAt(0), //84, .
-    0x0000, //85, 
+    0x0000, //85,
     ('e').charCodeAt(0), //86, e
     ('r').charCodeAt(0), //87, r
     0x0008, //88, backspace
     (' ').charCodeAt(0)  //89,  (space)
   ];
-  
+
   const CHARACHORDERLITE = [
     'GTM', //0
     'LCtrl', //1
@@ -765,8 +765,8 @@ const  CHARACHORDER = [
     '=', //62
     'Back'  //63
   ];
-  
-  
+
+
   //this shouldn't be used anymore
   let _keyMap = [
   'GTM', //0
@@ -802,7 +802,7 @@ const  CHARACHORDER = [
   'f', //30
   'g', //31
   'h', //32
-  'j', //33 
+  'j', //33
   'k', //34
   'l', //35
   ';', //36
@@ -836,12 +836,12 @@ const  CHARACHORDER = [
   ];
   _keyMap = _keyMap.reverse();
   const _keyMapDefaults = [
-    
+
     CHARACHORDER,
     CHARACHORDERLITE
-  
+
     ];
-    
+
     const _chordMaps: any[][] = [];
     const _chordLayout: any[][] = []
 
@@ -884,7 +884,7 @@ const  CHARACHORDER = [
       '#', //35, Hash Symbol
       '$', //36, Dollar Sign
       '%', //37, Percent
-      '&', //38, Amperstand
+      '&', //38, Ampersand
       '\'', //39, Single Quote
       '(', //40, Left Parenthesis
       ')', //41, Right Parenthesis
@@ -984,11 +984,11 @@ const  CHARACHORDER = [
       '‡', //135, Double Dagger
       'ˆ', //136, Circumflex
       '‰', //137, Per Mile
-      'Š', //138, Captial S Caron
+      'Š', //138, Capital S Caron
       '‹', //139, Left Guillemet
-      'Œ', //140, Captial Ligature OE
+      'Œ', //140, Capital Ligature OE
       '', //141, RI (Reverse Index)
-      'Ž', //142, Captial Z Caron
+      'Ž', //142, Capital Z Caron
       '', //143, SS3 (Single-Shift G3)
       '', //144, DCS (Device Control String)
       '‘', //145, Single Quote Left
@@ -1001,11 +1001,11 @@ const  CHARACHORDER = [
       '˜', //152, Small Tilde
       '™', //153, Trademark
       'š', //154, Small s Carson
-      '›', //155, Right Guillement
+      '›', //155, Right Guillemet
       'œ', //156, Small Ligature oe
       '', //157, Operating System Command
       'ž', //158, Small Z Caron
-      'Ÿ', //159, Capital Y Diaresis
+      'Ÿ', //159, Capital Y Diaeresis
       ' ', //160, No Break Space
       '¡', //161, Inverted Exclamation
       '¢', //162, Cent
@@ -1014,10 +1014,10 @@ const  CHARACHORDER = [
       '¥', //165, Yen
       '¦', //166, Broken Bar
       '§', //167, Section
-      '¨', //168, Diaresis
+      '¨', //168, Diaeresis
       '©', //169, Copyright
       'ª', //170, Feminine Ordinal
-      '«', //171, Double Left Guillement
+      '«', //171, Double Left Guillemet
       '¬', //172, Not
       '­', //173, Soft Hyphen
       '®', //174, Registered
@@ -1033,74 +1033,74 @@ const  CHARACHORDER = [
       '¸', //184, Cedilla
       '¹', //185, Superscript One
       'º', //186, Masculine Ordinal
-      '»', //187, Double Right Guillement
+      '»', //187, Double Right Guillemet
       '¼', //188, One Quarter Fraction
       '½', //189, One Half Fraction
       '¾', //190, Three Quarters Fraction
       '¿', //191, Inverted Question
-      'À', //192, Captial A Grave
-      'Á', //193, 
-      'Â', //194, 
-      'Ã', //195, 
-      'Ä', //196, 
-      'Å', //197, 
-      'Æ', //198, 
-      'Ç', //199, 
-      'È', //200, 
-      'É', //201, 
-      'Ê', //202, 
-      'Ë', //203, 
-      'Ì', //204, 
-      'Í', //205, 
-      'Î', //206, 
-      'Ï', //207, 
-      'Ð', //208, 
-      'Ñ', //209, 
-      'Ò', //210, 
-      'Ó', //211, 
-      'Ô', //212, 
-      'Õ', //213, 
-      'Ö', //214, 
-      '×', //215, 
-      'Ø', //216, 
-      'Ù', //217, 
-      'Ú', //218, 
-      'Û', //219, 
-      'Ü', //220, 
-      'Ý', //221, 
-      'Þ', //222, 
-      'ß', //223, 
-      'à', //224, 
-      'á', //225, 
-      'â', //226, 
-      'ã', //227, 
-      'ä', //228, 
-      'å', //229, 
-      'æ', //230, 
-      'ç', //231, 
-      'è', //232, 
-      'é', //233, 
-      'ê', //234, 
-      'ë', //235, 
-      'ì', //236, 
-      'í', //237, 
-      'î', //238, 
-      'ï', //239, 
-      'ð', //240, 
-      'ñ', //241, 
-      'ò', //242, 
-      'ó', //243, 
-      'ô', //244, 
-      'õ', //245, 
-      'ö', //246, 
-      '÷', //247, 
-      'ø', //248, 
-      'ù', //249, 
-      'ú', //250, 
-      'û', //251, 
-      'ü', //252, 
-      'ý', //253, 
-      'þ', //254, 
+      'À', //192, Capital A Grave
+      'Á', //193,
+      'Â', //194,
+      'Ã', //195,
+      'Ä', //196,
+      'Å', //197,
+      'Æ', //198,
+      'Ç', //199,
+      'È', //200,
+      'É', //201,
+      'Ê', //202,
+      'Ë', //203,
+      'Ì', //204,
+      'Í', //205,
+      'Î', //206,
+      'Ï', //207,
+      'Ð', //208,
+      'Ñ', //209,
+      'Ò', //210,
+      'Ó', //211,
+      'Ô', //212,
+      'Õ', //213,
+      'Ö', //214,
+      '×', //215,
+      'Ø', //216,
+      'Ù', //217,
+      'Ú', //218,
+      'Û', //219,
+      'Ü', //220,
+      'Ý', //221,
+      'Þ', //222,
+      'ß', //223,
+      'à', //224,
+      'á', //225,
+      'â', //226,
+      'ã', //227,
+      'ä', //228,
+      'å', //229,
+      'æ', //230,
+      'ç', //231,
+      'è', //232,
+      'é', //233,
+      'ê', //234,
+      'ë', //235,
+      'ì', //236,
+      'í', //237,
+      'î', //238,
+      'ï', //239,
+      'ð', //240,
+      'ñ', //241,
+      'ò', //242,
+      'ó', //243,
+      'ô', //244,
+      'õ', //245,
+      'ö', //246,
+      '÷', //247,
+      'ø', //248,
+      'ù', //249,
+      'ú', //250,
+      'û', //251,
+      'ü', //252,
+      'ý', //253,
+      'þ', //254,
       'ÿ', //255, Small y Diaeresis
       'KSC_00', //256, No Key Pressed
       'KSC_01', //257, Keyboard Error Roll Over
@@ -1196,7 +1196,7 @@ const  CHARACHORDER = [
       'KP_3', //347, Keypad 3 and Page Down
       'KP_4', //348, Keypad 4 and Left Arrow
       'KP_5', //349, Keypad 5
-      'KP_6', //350, Keypad 6 and Rigth Arrow
+      'KP_6', //350, Keypad 6 and Right Arrow
       'KP_7', //351, Keypad 7 and Home
       'KP_8', //352, Keypad 8 and Up Arrow
       'KP_9', //353, Keypad 9 and Page Up
@@ -1267,17 +1267,17 @@ const  CHARACHORDER = [
       'KSC_A2', //418, Keyboard Clear/Again
       'KSC_A3', //419, Keyboard CrSel/Props
       'KSC_A4', //420, Keyboard ExSel
-      'KSC_A5', //421, 
-      'KSC_A6', //422, 
-      'KSC_A7', //423, 
-      'KSC_A8', //424, 
-      'KSC_A9', //425, 
-      'KSC_AA', //426, 
-      'KSC_AB', //427, 
-      'KSC_AC', //428, 
-      'KSC_AD', //429, 
-      'KSC_AE', //430, 
-      'KSC_AF', //431, 
+      'KSC_A5', //421,
+      'KSC_A6', //422,
+      'KSC_A7', //423,
+      'KSC_A8', //424,
+      'KSC_A9', //425,
+      'KSC_AA', //426,
+      'KSC_AB', //427,
+      'KSC_AC', //428,
+      'KSC_AD', //429,
+      'KSC_AE', //430,
+      'KSC_AF', //431,
       'KSC_B0', //432, Keypad 00
       'KSC_B1', //433, Keypad 000
       'KSC_B2', //434, Thousands Separator
@@ -1324,8 +1324,8 @@ const  CHARACHORDER = [
       'KSC_DB', //475, Keypad Octal
       'KSC_DC', //476, Keypad Decimal
       'KSC_DD', //477, Keypad Hexadecimal
-      'KSC_DE', //478, 
-      'KSC_DF', //479, 
+      'KSC_DE', //478,
+      'KSC_DF', //479,
       'KSC_E0', //480, Keyboard Left Control
       'KSC_E1', //481, Keyboard Left Shift
       'KSC_E2', //482, Keyboard Left Alt
@@ -1354,10 +1354,10 @@ const  CHARACHORDER = [
       'KSC_F9', //505, Media Coffee
       'KSC_FA', //506, Media Refresh
       'KSC_FB', //507, Media Calc
-      'KSC_FC', //508, 
-      'KSC_FD', //509, 
-      'KSC_FE', //510, 
-      'KSC_FF', //511, 
+      'KSC_FC', //508,
+      'KSC_FD', //509,
+      'KSC_FE', //510,
+      'KSC_FF', //511,
       'LEFT_CTRL', //512, Left Control Keyboard Modifier
       'LEFT_SHIFT', //513, Left Shift Keyboard Modifier
       'LEFT_ALT', //514, Left Alt Keyboard Modifier
@@ -1369,45 +1369,45 @@ const  CHARACHORDER = [
       'RELEASE_MOD', //520, Release all keyboard modifiers
       'RELEASE_ALL', //521, Release all keys and keyboard modifiers
       'RELEASE_KEYS', //522, Release all keys, but not keyboard modifiers
-      '', //523, 
-      '', //524, 
-      '', //525, 
-      '', //526, 
-      '', //527, 
+      '', //523,
+      '', //524,
+      '', //525,
+      '', //526,
+      '', //527,
       'RESTART', //528, Restart Device
-      '', //529, 
+      '', //529,
       'BOOT', //530, Bootloader Mode
-      '', //531, 
+      '', //531,
       'GTM', //532, Toggle GTM
-      '', //533, 
+      '', //533,
       'IMPULSE', //534, Toggle Impulse
-      '', //535, 
+      '', //535,
       'DUP', //536, Repeat Last Note
-      '', //537, 
+      '', //537,
       'SPUR', //538, Spur Toggle
-      '', //539, 
+      '', //539,
       'AMBILEFT', //540, AmbiThrow (left)
-      '', //541, 
+      '', //541,
       'AMBIRIGHT', //542, AmbiThrow (right)
-      '', //543, 
+      '', //543,
       'SPACERIGHT', //544, Right Spacebar (eg CC Lite)
-      '', //545, 
-      '', //546, 
-      '', //547, 
+      '', //545,
+      '', //546,
+      '', //547,
       'KM_1_L', //548, Primary Keymap (left key)
       'KM_1_R', //549, Primary Keymap (right key)
       'KM_2_L', //550, Secondary Keymap [Num-shift] (left key)
-      'KM_2_R', //551, Secondary Keymap [Num-shift] (rightkey)
+      'KM_2_R', //551, Secondary Keymap [Num-shift] (right key)
       'KM_3_L', //552, Tertiary Keymap (left key)
       'KM_3_R', //553, Tertiary Keymap (left key)
-      '', //554, 
-      '', //555, 
-      '', //556, 
-      '', //557, 
-      '', //558, 
-      '', //559, 
-      '', //560, 
-      '', //561, 
+      '', //554,
+      '', //555,
+      '', //556,
+      '', //557,
+      '', //558,
+      '', //559,
+      '', //560,
+      '', //561,
       'MS_CLICK_LF', //562, Mouse Left Button Press and Release
       'MS_CLICK_RT', //563, Mouse Right Button Press and Release
       'MS_CLICK_MD', //564, Mouse Middle Button Press and Release
@@ -1420,7 +1420,7 @@ const  CHARACHORDER = [
       'MS_SCRL_DN', //571, Mouse Scroll Coast Down
       'MS_SCRL_UP' //572, Mouse Scroll Coast Up
   ];
-  
+
 
   const oldAsciiKeyReplacementDictionary={
     'Tab':'TAB', //Horizontal Tab
@@ -1581,6 +1581,6 @@ const  CHARACHORDER = [
 
 export { _actionMap, _keyMapDefaults, _keyMap, _chordMaps, _chordLayout, actionMap, oldAsciiKeyReplacementDictionary };
 
-  
-    
-   
+
+
+

@@ -1,13 +1,12 @@
 import React, { ReactElement } from 'react';
 import { FixedSizeList } from 'react-window';
-import type { ChordStatistics } from '../../../models/trainingStatistics';
 import styled from 'styled-components';
-import { useStoreState } from '../../../store/store';
-import useContainerDimensions from '../../../hooks/useContainerDimensions';
 import { getCumulativeAverageChordTypeTime } from '../../../helpers/aggregation';
-import { useHUD } from '../../../hooks/useHUD';
-import usePopover from '../../../hooks/usePopover';
 import { truncateString } from '../../../helpers/truncateString';
+import useContainerDimensions from '../../../hooks/useContainerDimensions';
+import usePopover from '../../../hooks/usePopover';
+import type { ChordStatistics } from '../../../models/trainingStatistics';
+import { useStoreState } from '../../../store/store';
 
 // This is used to account for the header row as well as the "aggregate" row that shows average speed and
 // a sum of errors and occurrences
@@ -136,7 +135,7 @@ const Header = () => {
       <HeaderItemRow helpText="The name of the target chord or character you typed.">
         Chord
       </HeaderItemRow>
-      <HeaderItemRow helpText="The speed at which you typed the chord in hundreths of a second.">
+      <HeaderItemRow helpText="The speed at which you typed the chord in hundredths of a second.">
         Speed
       </HeaderItemRow>
       <HeaderItemRow helpText="The number of times you have made a mistake typing this chord.">

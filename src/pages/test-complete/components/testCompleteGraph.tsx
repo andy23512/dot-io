@@ -1,9 +1,7 @@
-import  ApexCharts from 'apexcharts';
+import ApexCharts from 'apexcharts';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import usePopover from '../../../hooks/usePopover';
-import { useStoreState, useStoreActions } from '../../../store/store';
-import { getCumulativeAverageChordTypeTime } from '../../../../src/helpers/aggregation';
+import { useStoreActions, useStoreState } from '../../../store/store';
 
 
 
@@ -75,12 +73,12 @@ export function myGraph(wordNames : any, wordOccurrences : any , wordPerMinute: 
       name: "Individual CPM",
       data: rawSpeedOfCurrentWord
     },
-    
+
     {
       name: "Errors",
       data: wordOccurrences
     },
-    
+
   ],
   xaxis: {
     categories: wordNames
@@ -146,8 +144,8 @@ export function myGraph(wordNames : any, wordOccurrences : any , wordPerMinute: 
 
         },
       }
-     
-    
+
+
   ],
   grid: {
     padding: {
@@ -155,7 +153,7 @@ export function myGraph(wordNames : any, wordOccurrences : any , wordPerMinute: 
       right: 5
     }
   },
-  
+
   tooltip: {
     theme:"dark",
     x: {
@@ -169,7 +167,7 @@ export function myGraph(wordNames : any, wordOccurrences : any , wordPerMinute: 
     toggleDataSeries: true
   },
   },
-  
+
 };
 
 const chart = new ApexCharts(document.getElementById("timeline-chart"), options);
@@ -186,7 +184,7 @@ function wpmDataCalculator (wpmArray : any){
   for (let i =0; i<wpmArray.length; i++){
     localTemp = 0;
     wpmTemp = wpmTemp + wpmArray[i];
-    
+
     i == 0 ?localTemp = wpmTemp : localTemp = wpmTemp / iterator;
 
     console.log('wpmTemp in the new function '+ wpmTemp);
@@ -201,7 +199,7 @@ function wpmDataCalculator (wpmArray : any){
 
     wpmArray[i] = wpm.toFixed(0);
     //console.log('WPM in the new function '+ wpm.toFixed(0));
-  
+
     iterator++;
   }
   return wpmArray;
@@ -212,7 +210,7 @@ export function TestCompleteGraph(): ReactElement {
   const currentTrainingSetting = useStoreState((store : any) => store.trainingStatistics);
   const currentTrainingScenario = useStoreState((store) => store.currentTrainingScenario);
   const storedTestTextData = useStoreState((store) => store.storedTestTextData);
-  const testTeirHighestWPM= useStoreActions((store) => store.setTestTeirHighestWPM); 
+  const testTierHighestWPM= useStoreActions((store) => store.setTestTierHighestWPM);
 
 
 
@@ -251,7 +249,7 @@ export function TestCompleteGraph(): ReactElement {
     if(currentTrainingScenario == 'CUSTOMTIER'){
       console.log('Only entered if this is custom tier ' + currentTrainingScenario);
     for(let i =0; i<chordsToChooseFrom?.length; i++){
-    
+
       finalErrorsArray.push(wordOccurrences[wordNames.indexOf(chordsToChooseFrom[i])]);
       finalWPMArray.push(wordPerMinute[wordNames.indexOf(chordsToChooseFrom[i])]);
       finalRawWPM.push(rawSpeedOfCurrentWord[wordNames.indexOf(chordsToChooseFrom[i])]);
@@ -298,20 +296,20 @@ export function TestCompleteGraph(): ReactElement {
   }
 
     const handleEvent = () => {
-      testTeirHighestWPM(wordPerMinute[wordPerMinute.length-1]);
+      testTierHighestWPM(wordPerMinute[wordPerMinute.length-1]);
         myGraph(wordNames, wordOccurrences, wordPerMinute, rawSpeedOfCurrentWord)
 
       };
-  
+
       React.useEffect(() => {
-        
+
         handleEvent();
 
       }, []);
-    
+
 
   return (
-    
+
     <React.Fragment>
 
 

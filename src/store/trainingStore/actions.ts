@@ -2,10 +2,11 @@ import { action, actionOn, Actions, thunkOn } from 'easy-peasy';
 import type { ChordLibraryRecord } from '../../data/chordLibrary';
 import { generateChords } from '../../helpers/generateTrainingData';
 import type { TrainingScenario } from '../../models/trainingScenario';
-import { defaultTrainingSettings, defaultAlphabeticTestTraining, defaultTrigramsTestTraining, defaultTrainingSettingsState } from '../../models/trainingSettingsStateModel';
-import { _keyMapDefaults  } from "../../pages/manager/controls/maps";
-import { wpmMethodCalculatorForStoredChords } from '../../helpers/aggregation';
+import { defaultAlphabeticTestTraining, defaultTrainingSettings, defaultTrainingSettingsState, defaultTrigramsTestTraining } from '../../models/trainingSettingsStateModel';
 
+import type { TrainingLevels } from 'src/models/trainingLevels';
+import type { ChordStatisticsFromDevice } from 'src/models/trainingStatisticsFromDevice';
+import type { WordTrainingValues } from 'src/models/wordTrainingValues';
 import {
   ChordStatistics,
   createEmptyChordStatistics,
@@ -19,10 +20,6 @@ import type {
   TrainingStoreStateModel,
 } from '../../models/trainingStore';
 import { getChordLibraryForTrainingScenario } from '../../pages/test/components/EditChordModal';
-import type { WordTrainingValues } from 'src/models/wordTrainingValues';
-import type { TrainingLevels } from 'src/models/trainingLevels';
-import store from '../store';
-import type { ChordStatisticsFromDevice } from 'src/models/trainingStatisticsFromDevice';
 
 const CHORD_LINE_LENGTH = 30;
 const ALPHABET_LINE_LENGTH = 24;
@@ -54,7 +51,7 @@ export const setGlobalDictionaries = (
  * Any change made to state here will automatically be reflected in any component that consumes this state.
  * The majority of the application logic exists here.
  */
-const trainingStoreActions: TrainingStoreActionsModel = { 
+const trainingStoreActions: TrainingStoreActionsModel = {
   setTrainingSettings: action((state, payload) => {
     state.trainingSettings = payload;
   }),
@@ -79,7 +76,7 @@ const trainingStoreActions: TrainingStoreActionsModel = {
   }),
   setRestartTestMode: action((state, payload) => {
     state.restartTestMode = payload;
-  }), 
+  }),
   setTrainingLevel: action((state, payload) => {
     state.trainingLevel = payload as TrainingLevels;
   }),
@@ -89,8 +86,8 @@ const trainingStoreActions: TrainingStoreActionsModel = {
   setModuleCompleteModalToggle: action((state, payload) => {
     state.moduleCompleteModalToggle = payload as boolean;
   }),
-  setDownloadModulModalToggle: action((state, payload) => {
-    state.downloadModulModalToggle = payload as boolean;
+  setDownloadModuleModalToggle: action((state, payload) => {
+    state.downloadModuleModalToggle = payload as boolean;
   }),
   setModuleNumber: action((state, payload) => {
     state.moduleNumber = payload as number;
@@ -110,9 +107,9 @@ const trainingStoreActions: TrainingStoreActionsModel = {
     state.compareText = [];
     state.numberOfWordsChorded = 0;
     state.storedChordsFromDevice = JSON?.parse(localStorage?.getItem('chordsReadFromDevice'));
-    //  console.log('Is this the current traing scenario ' + state.currentTrainingScenario);
+    //  console.log('Is this the current training scenario ' + state.currentTrainingScenario);
     // Pull the chord library from memory if it's there, otherwise pull it from defaults
-    if(state.currentTrainingScenario === 'ALLCHORDS'){ 
+    if(state.currentTrainingScenario === 'ALLCHORDS'){
 
       //console.log('stored chord rep '+ state.storedChordsRepresentation)
       state.chordsToPullFrom = getChordLibraryForTrainingScenario(
@@ -151,7 +148,7 @@ const trainingStoreActions: TrainingStoreActionsModel = {
     generateStartingTrainingData(state as unknown as TrainingStoreStateModel);
 
 
-    // Open the chord editing modal if the user is starting the fourth, fifth, or sixth training module 
+    // Open the chord editing modal if the user is starting the fourth, fifth, or sixth training module
     if (payload[0] === 'LEXICOGRAPHIC' || payload[0] === 'SUPERSONIC' || payload[0] === 'CUSTOMTIER')
       state.isDisplayingChordEditModal = true;
     else
@@ -162,7 +159,7 @@ const trainingStoreActions: TrainingStoreActionsModel = {
     // TODO: Figure out the correct typing for these function calls so eslint and ts stop complaining
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    moveIndiciesOfTargetChord(state);
+    moveIndicesOfTargetChord(state);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -190,10 +187,10 @@ const trainingStoreActions: TrainingStoreActionsModel = {
       // If the user is in "Auto" or "Goal Driven" mode, then the following properties are updated automatically on level change
       //    Speed goal is set to (1 - slowestChord.averageSpeed)
       //    Number of target chords is set to the number of existing chords whose average speed is greater than the new speed goal
-      const speedThesholdToCompleteLevel = state.trainingSettings.speedGoal;
+      const speedThresholdToCompleteLevel = state.trainingSettings.speedGoal;
       const hasCompletedLevel = state.trainingStatistics.statistics.filter(
         (s) => s.averageSpeed === 0 ||
-          s.averageSpeed > speedThesholdToCompleteLevel
+          s.averageSpeed > speedThresholdToCompleteLevel
       ).length === 0;
       const isSettingsSetToAuto = state.trainingSettings.autoOrCustom === 'AUTO';
 
@@ -248,14 +245,14 @@ const trainingStoreActions: TrainingStoreActionsModel = {
     store.trainingText = [];
     store.currentLineOfTrainingText = 0;
     store.currentSubindexInTrainingText = 0;
-    generateNextLineOfInputdata(store as unknown as TrainingStoreStateModel);
-    generateNextLineOfInputdata(store as unknown as TrainingStoreStateModel);
+    generateNextLineOfInputData(store as unknown as TrainingStoreStateModel);
+    generateNextLineOfInputData(store as unknown as TrainingStoreStateModel);
   }),
   setTypedTrainingText: action((state, payload) => {
     state.typedTrainingText = payload;
   }),
-  setTestTeirHighestWPM: action((state, payload) => {
-    state.testTeirHighestWPM = payload as number;
+  setTestTierHighestWPM: action((state, payload) => {
+    state.testTierHighestWPM = payload as number;
   }),
   // This needs to be a thunkOn so that we can dispatch multiple actions
   // when the target word matches the word the user has entered
@@ -365,10 +362,10 @@ function generateTrainingSettings(storeState: TrainingStoreStateModel){
   if(storeState.currentTrainingScenario == 'ALPHABET'){
 
    return JSON.parse(JSON.stringify(defaultAlphabeticTestTraining))
-  } 
+  }
   else if(storeState.currentTrainingScenario == 'TRIGRAM'){
     return JSON.parse(JSON.stringify(defaultTrigramsTestTraining),)
-  } 
+  }
   else if(storeState.currentTrainingScenario == 'ALLCHORDS') {
     return JSON.parse(JSON.stringify(defaultTrainingSettingsState),)
   }
@@ -378,7 +375,7 @@ function generateTrainingSettings(storeState: TrainingStoreStateModel){
   else {
     return JSON.parse(JSON.stringify(defaultTrainingSettings),)
   }
-  
+
 }
 
 
@@ -447,12 +444,12 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
 
   let timeTakenToTypeChord =
     (performance.now() - store.timeOfLastChordStarted) / 10;
-  let numberOfOccurences = 0;
+  let numberOfOccurrences = 0;
 
   const numberOfChordsConquered = store.trainingStatistics.statistics.filter(
     (s) => (s.averageSpeed > store.trainingSettings.speedGoal  && s.numberOfOccurrences >= 10 ),
   ).length;
-  
+
   //This piece of the code triggers the Call to show the modal if the user completes that module.
    if(numberOfChordsConquered > store.trainingStatistics.statistics.length-1 && store.wasModuleShown == false) {
     store.moduleCompleteModalToggle = true as boolean;
@@ -475,8 +472,8 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
     //console.log('oh yea '+ timeTakenToTypeChord);
     //console.log('oh yea performance '+ performance.now())
     timeTakenToTypeChord = 0;
-    numberOfOccurences =-1;
-    
+    numberOfOccurrences =-1;
+
     //console.log('In here the check user first ty '+userIsTypingFirstChord + ' '+ timeTakenToTypeChord);
     //console.log('oh yea '+ timeTakenToTypeChord);
     //console.log('oh yea '+ sessionStorage.getItem('timeThat')/10)
@@ -484,7 +481,7 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
   }
 
 
-  // Never let the last speed go above 500 milliseconds so the user's times dont get ruined if the walk away from their desk
+  // Never let the last speed go above 500 milliseconds so the user's times don't get ruined if the walk away from their desk
 
 
   chordStats.lastSpeed = Math.min(
@@ -494,14 +491,14 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
   store.timeTakenToTypePreviousChord = chordStats?.lastSpeed;
 
 
-  
+
   chordStats.averageSpeed =
     (chordStats.averageSpeed * chordStats.numberOfOccurrences +
       chordStats.lastSpeed) /
     (chordStats.numberOfOccurrences + 1);
 
 
-    chordStats.numberOfOccurrences = chordStats.numberOfOccurrences + numberOfOccurences;
+    chordStats.numberOfOccurrences = chordStats.numberOfOccurrences + numberOfOccurrences;
   store.userIsEditingPreviousWord ===false ? chordStats.numberOfOccurrences++ : '';
 
   if (couldFindChordInLibrary) {
@@ -529,7 +526,7 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
     timeTakenToTypeChord,
     MAXIMUM_ALLOWED_SPEED_FOR_CHORD_STATS,
   );
- 
+
   //const sum = chordStatsFromDevice.chordsMastered?.reduce((a, b) => a + b, 0);
 
   //chordStatsFromDevice.averageSpeed = (sum / chordStatsFromDevice.chordsMastered?.length) || 0;
@@ -539,7 +536,7 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
     chordStatsFromDevice.lastSpeed) /
   (chordStatsFromDevice.numberOfOccurrences + 1);
 
-  chordStatsFromDevice.numberOfOccurrences = chordStats.numberOfOccurrences + numberOfOccurences;
+  chordStatsFromDevice.numberOfOccurrences = chordStats.numberOfOccurrences + numberOfOccurrences;
 
 
   if(chordStatsFromDevice.chordsMastered?.length == 10){
@@ -568,14 +565,14 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
 
  const val = store.storedChordsFromDevice;
   window.addEventListener('beforeunload', function() {
-    // number of miliseconds to hold before unloading page
+    // number of milliseconds to hold before unloading page
     const x = 500;
     const a = (new Date()).getTime() + x;
 
      localStorage.setItem("chordsReadFromDevice", JSON.stringify(val)); //Store downloaded chords in local storage
-    
 
-    // browser will hold with unloading your page for X miliseconds, letting
+
+    // browser will hold with unloading your page for X milliseconds, letting
     // your localStorage call to finish
     while ((new Date()).getTime() < a) {
       //Not an Empty block statement en-list
@@ -587,7 +584,7 @@ export function calculateStatisticsForTargetChord(store: TrainingStoreModel): vo
 
 }
 
-function moveIndiciesOfTargetChord(state: TrainingStoreModel): void {
+function moveIndicesOfTargetChord(state: TrainingStoreModel): void {
 
   const isReadyToAdvanceToNextLineOfTrainingText =
     state.currentSubindexInTrainingText + 1 >=
@@ -595,7 +592,7 @@ function moveIndiciesOfTargetChord(state: TrainingStoreModel): void {
   if (isReadyToAdvanceToNextLineOfTrainingText) {
     state.currentLineOfTrainingText += 1;
     state.currentSubindexInTrainingText = 0;
-    generateNextLineOfInputdata(state);
+    generateNextLineOfInputData(state);
   } else {
     state.currentSubindexInTrainingText += 1;
   }
@@ -610,7 +607,7 @@ function generateEmptyChordStatistics(
     statistics: Object.keys(library).map((key) => {
       if(scenario == 'ALLCHORDS') return createEmptyChordStatisticsFromDevice(key, scenario, [] , []);
       else return createEmptyChordStatistics(key, scenario);
-      
+
     }),
   };
 }
@@ -631,7 +628,7 @@ function generateTestTrainingData(
 return fullTestData;
 }
 
-function generateNextLineOfInputdata(state: TrainingStoreStateModel) {
+function generateNextLineOfInputData(state: TrainingStoreStateModel) {
 
   const lineLength =
     state.currentTrainingScenario === 'ALPHABET'
@@ -649,7 +646,7 @@ function generateNextLineOfInputdata(state: TrainingStoreStateModel) {
       speedGoal: state.trainingSettings.speedGoal,
       wordTestNumberValue: state.wordTestNumber,
       scenario: state.currentTrainingScenario,
-      storedTestData: state.storedTestTextData,  
+      storedTestData: state.storedTestTextData,
       storedChordsFromDevice: state.storedChordsFromDevice?.statistics,
 
 
@@ -695,7 +692,7 @@ const generateStartingTrainingData = (state: TrainingStoreStateModel) => {
       : CHORD_LINE_LENGTH;
 
   const generateOneLineOfChords = () =>
-  
+
     generateChords({
       chordsToChooseFrom: state.chordsToPullFrom,
       numberOfTargetChords: state.trainingSettings.targetChords,
@@ -706,7 +703,7 @@ const generateStartingTrainingData = (state: TrainingStoreStateModel) => {
       speedGoal: state.trainingSettings.speedGoal,
       wordTestNumberValue: state.wordTestNumber,
       scenario: state.currentTrainingScenario,
-      storedTestData: state.storedTestTextData,  
+      storedTestData: state.storedTestTextData,
       storedChordsFromDevice: state.storedChordsFromDevice?.statistics,
     });
   state.trainingText = [generateOneLineOfChords(), generateOneLineOfChords()];

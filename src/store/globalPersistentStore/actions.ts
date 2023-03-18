@@ -1,5 +1,5 @@
 import { action } from 'easy-peasy';
-import type { GlobalStoreActions, GlobalStoreState } from '../../../src/models/globalStorage';
+import type { GlobalStoreActions } from '../../models/globalStorage';
 
 const SAVED_STATS_STORAGE_KEY = 'SAVED_STATS_STORAGE_KEY';
 /**

@@ -1,7 +1,5 @@
-import { _keyMapDefaults, _actionMap, _keyMap, _chordMaps, _chordLayout, actionMap, oldAsciiKeyReplacementDictionary } from "./maps";
 import hex2Bin from 'hex-to-bin';
-import { replace } from "lodash";
-import { commitAllWithStart } from "../components/commitAll";
+import { _actionMap, _chordLayout, _chordMaps, _keyMap, _keyMapDefaults, actionMap, oldAsciiKeyReplacementDictionary } from "./maps";
 
 
 
@@ -19,8 +17,8 @@ import { commitAllWithStart } from "../components/commitAll";
      public static  _chordMapIdCounter = 0
      public static count = 0;
 
-  
-     
+
+
      public static CONFIG_ID_ENABLE_SERIAL_LOG =       "01";
      public static CONFIG_ID_ENABLE_SERIAL_RAW =       "02";
      public static CONFIG_ID_ENABLE_SERIAL_CHORD =     "03";
@@ -39,7 +37,7 @@ import { commitAllWithStart } from "../components/commitAll";
      public static CONFIG_ID_ENABLE_CHORDING =         "28";
      public static CONFIG_ID_CHAR_KILLER_TOGGLE =      "29";
      public static CONFIG_ID_CHAR_COUNTER_KILLER =     "2A";
-     
+
   }
 
   function compare(a : any, b : any) {
@@ -80,7 +78,7 @@ import { commitAllWithStart } from "../components/commitAll";
 
 
   export async function selectBase(){
-    
+
     await sendCommandString("SELECT BASE");
     await readGetOneAndToss(); //toss the result of 2000
   }
@@ -96,7 +94,7 @@ import { commitAllWithStart } from "../components/commitAll";
     }else{
       console.log('serial port is not open yet');
     }
-    
+
   }
 
   export async function readGetOneAndToss(){
@@ -170,7 +168,7 @@ import { commitAllWithStart } from "../components/commitAll";
           console.log(MainControls.abortController1);
           await MainControls.abortController1.abort();
           console.log(MainControls.serialPort.readable);
-          await MainControls.lineReaderDone.catch(() => {/* Ingore the error */}); //this frees up the serialPort.readable after the abortControl1.abort() signal
+          await MainControls.lineReaderDone.catch(() => {/* Ignore the error */}); //this frees up the serialPort.readable after the abortControl1.abort() signal
           // await serialPort.readable.cancel();
         // }
       }
@@ -182,7 +180,7 @@ import { commitAllWithStart } from "../components/commitAll";
     console.log("convertHexadecimalPhraseToAsciiString()");
     //let actionId = actionMap.indexOf(part); //returns the position of the first occurrence of a value in a string.; returns -1 if not found
 
-    //let humanStringPart = actionMap[actionId]; //returns the ASCII string output from the actionMap 
+    //let humanStringPart = actionMap[actionId]; //returns the ASCII string output from the actionMap
     //assume 2x size
     //get every 2 characters
     //TODO covert to byte array and account for non-ascii inputs like mouse moves
@@ -207,7 +205,7 @@ import { commitAllWithStart } from "../components/commitAll";
         //ascii_to_hexa(arrValue);
         const strValue = String(arrValue.join(''));
         console.log(strValue);
-   
+
         const hexChordString = strValue[2]; // Should return 32 characters at all times
         const hexAsciiString = strValue.substr(17, strValue.length);
         const strValues = ["","","",""];
@@ -216,12 +214,12 @@ import { commitAllWithStart } from "../components/commitAll";
         strValues[2] = hexChordString;
         strValues[3] = hexAsciiString;
         console.log(strValues);
-   
+
         //appendToList(strValues);
         // _chordMaps.push(["0x"+hexChordString,strValues[1]]);
         _chordMaps.push([convertHexadecimalChordToHumanString(hexChordString),strValues[1]]); //this ultimately isn't used
-        
-   
+
+
         appendToRow(strValues);
       }
       if(i>=expectedLineCount){
@@ -233,7 +231,7 @@ import { commitAllWithStart } from "../components/commitAll";
   export async function readGetHexChord(){
     let hexChordString = "";
     if(MainControls.serialPort){
-      
+
       // let decoder = new TextDecoderStream();
       // let inputDone = port.readable.pipeTo(decoder.writable);//throws error here
       // console.log(inputDone);
@@ -245,7 +243,7 @@ import { commitAllWithStart } from "../components/commitAll";
         await readGetOneAndToss(); //this is added for the latest firmware with customers, where decimal version
         console.log("i did indeed enter here")
       }
-     
+
       //console.log(MainControls._firmwareVersion);
       //console.log(parseInt(MainControls._firmwareVersion))
       //console.log('Compare for version method :' + compare(MainControls._firmwareVersion, "0.9.0"));
@@ -256,10 +254,10 @@ import { commitAllWithStart } from "../components/commitAll";
       }else{
         console.log(['value',value]);
         // await reader.cancel().then(()=>{console.log(['value',value]);console.log('then cancelled reader');});
-        // await inputDone.catch(() => {}); 
+        // await inputDone.catch(() => {});
         // reader.releaseLock();
-    
-        
+
+
         if(value){
           const arrValue = [...value];
           const strValue = String(arrValue.join(''));
@@ -268,7 +266,7 @@ import { commitAllWithStart } from "../components/commitAll";
           await readGetOneAndToss(); //the "processing chord:" decimal output
         }
       }
-      
+
     }
     return hexChordString;
   }
@@ -283,7 +281,7 @@ import { commitAllWithStart } from "../components/commitAll";
       hexString = "00";
     }
     const bigNum = BigInt("0x"+hexString);
-    
+
     if(MainControls._chordmapId=="CHARACHORDER"){ //charachorder original uses different key map structure
       const decString = String(bigNum).split(''); //no left zeros; that's ok
       console.log(decString);
@@ -320,9 +318,9 @@ import { commitAllWithStart } from "../components/commitAll";
               actionId = 0x0200+noteId;
             }
             humanString+=actionMap[actionId];
-            
+
             humanString += " + ";
-  
+
             noteId = chord_to_noteId(1*10**(decString.length-i-1));
             actionId = _keyMapDefaults[0][noteId];
             if(actionId == 0){
@@ -331,11 +329,11 @@ import { commitAllWithStart } from "../components/commitAll";
             humanString+=actionMap[actionId];
           }
         }
-        //This checks if the Chord has the sequence e + e inside if it does this changes it to the correct e + r diagonal press representation 
+        //This checks if the Chord has the sequence e + e inside if it does this changes it to the correct e + r diagonal press representation
    // if(humanString.indexOf('e + e')!=-1 || humanString.indexOf('e + e') != 0) {
      // humanString = humanString.replace("e + e", "r + e");
          // }
-        //This checks if the Chord has the sequence m + k inside if it does this changes it to the correct m + c diagonal press representation 
+        //This checks if the Chord has the sequence m + k inside if it does this changes it to the correct m + c diagonal press representation
 
           if(humanString.indexOf('m + k')!=-1 || humanString.indexOf('m + k') != 0) {
             humanString = humanString.replace("m + k", "m + c");
@@ -379,7 +377,7 @@ import { commitAllWithStart } from "../components/commitAll";
         }
       }
     }
-  
+
     console.log(humanString);
     return humanString;
   }
@@ -391,11 +389,11 @@ import { commitAllWithStart } from "../components/commitAll";
   function pad(s,z){s=""+s;return s.length<z?pad("0"+s,z):s}
   function unpad(s){s=""+s;return s.replace(/^0+/,'')}
   function backpad(s,z){s=""+s;return s.length<z?backpad(s+"0",z):s}
-  
+
   //Decimal operations
   function Dec2Bin(n){if(!checkDec(n)||n<0)return 0;return n.toString(2)}
   function Dec2Hex(n){if(!checkDec(n)||n<0)return 0;return n.toString(16)}
-  
+
   //Binary Operations
   function Bin2Dec(n ){
     if(!checkBin(n))
@@ -403,12 +401,12 @@ import { commitAllWithStart } from "../components/commitAll";
     return parseInt(n,2).toString(10)
   }
   function Bin2Hex(n){if(!checkBin(n))return 0;return parseInt(n,2).toString(16)}
-  
+
   //Hexadecimal Operations
   //function Hex2Bin(n){if(!checkHex(n))return 0;return parseInt(n,16).toString(2)} do not use
   function Hex2Dec(n){if(!checkHex(n))return 0;return parseInt(n,16).toString(10)}
-  
-  export function convertHexadecimalChordToHumanChordForAllChordsTeir(hexChord){
+
+  export function convertHexadecimalChordToHumanChordForAllChordsTier(hexChord){
     //console.log("convertHexadecimalChordToHumanChord()");
     //console.log(hexChord);
     const humanChord = [];
@@ -423,7 +421,7 @@ import { commitAllWithStart } from "../components/commitAll";
         if(actionCode!=0){
           //replaceOldAsciiKeys()
           console.log('this is actionMap output '+ actionMap[actionCode as number])
-            const humanStringPart = replaceOldAsciiKeys(actionMap[actionCode as number]); //returns the ASCII string output from the actionMap 
+            const humanStringPart = replaceOldAsciiKeys(actionMap[actionCode as number]); //returns the ASCII string output from the actionMap
             //humanStringPart = oldAsciiKeyReplacementDictionary[humanStringPart];
             //console.log('Old Ascii '+ humanStringPart)
             humanChord.push(humanStringPart); //Replace when new action codes arrive
@@ -439,7 +437,7 @@ import { commitAllWithStart } from "../components/commitAll";
     //console.log(humanChord);
     return humanChord;
 }
-  
+
       export function convertHexadecimalChordToHumanChord(hexChord){
         //console.log("convertHexadecimalChordToHumanChord()");
         //console.log(hexChord);
@@ -448,7 +446,7 @@ import { commitAllWithStart } from "../components/commitAll";
         console.log(hexChord);
         console.log(binChord);
         const chainIndex = binChord.substring(0,8); //unused right now; this is used for phrases that have more than 192 bytes
-    
+
         for(let i=0; i<12; i++){
             const binAction = binChord.substring(8+i*10,8+(i+1)*10); //take 10 bits at a time
             const actionCode = Bin2Dec(binAction); //convert 10-bit binary to an action id
@@ -457,7 +455,7 @@ import { commitAllWithStart } from "../components/commitAll";
                 if(humanChord.length>0){
                     humanChord += " + "; //add this + between action ids; put here so we don't have to remove it at end of for-loop
                 }
-  
+
                 console.log('this is actionMap output '+ actionMap[actionCode as number])
                 const humanStringPart = replaceOldAsciiKeys(actionMap[actionCode as number]);                //humanStringPart = oldAsciiKeyReplacementDictionary[humanStringPart];
                 //console.log('Old Ascii '+ humanStringPart)
@@ -479,7 +477,7 @@ import { commitAllWithStart } from "../components/commitAll";
     const part1 = 5*Math.floor(Math.log10(chord));
     const part2 = (Math.floor(chord/(10**Math.floor(Math.log10(chord)))+1)/2);
     const part3 = Math.log10(chord)
-  
+
     const full = Math.floor(5*Math.floor(Math.log10(chord)) + (Math.floor(chord/(10**Math.floor(Math.log10(chord)))+1)/2))
     console.log([chord,part1,part2,part3,full]);
     return full;
@@ -487,10 +485,10 @@ import { commitAllWithStart } from "../components/commitAll";
 
   export async function setupLineReader(){
     if(MainControls.serialPort){
-      console.log('setupLineRader()');
+      console.log('setupLineReader()');
       const decoder = new TextDecoderStream();
-      MainControls.abortController1 = new AbortController(); //reset abortControler1
-      MainControls.abortController2 = new AbortController(); //reset abortControler2
+      MainControls.abortController1 = new AbortController(); //reset abortController1
+      MainControls.abortController2 = new AbortController(); //reset abortController2
       //preventAbort:true,
       MainControls.lineReaderDone = MainControls.serialPort.readable.pipeTo(decoder.writable, {preventAbort:true,signal:MainControls.abortController1.signal});//throws error here
       const inputStream = decoder.readable.pipeThrough(
@@ -509,14 +507,14 @@ import { commitAllWithStart } from "../components/commitAll";
     constructor() {
       this.chunks = '';
     }
-  
+
     transform(chunk: any, controller: any) {
       this.chunks += chunk;
       const lines = this.chunks.split('\r\n');
       this.chunks = lines.pop();
       lines.forEach((line:any) => controller.enqueue(line));
     }
-  
+
     flush(controller: any) {
       controller.enqueue(this.chunks);
     }
@@ -537,7 +535,7 @@ import { commitAllWithStart } from "../components/commitAll";
 
   export function convertHumanStringToHexadecimalPhrase(humanString:string) : string{
     let hexString = "";
-    for (let i = 0; i<humanString.length; i ++) 
+    for (let i = 0; i<humanString.length; i ++)
     {
       const hex = Number(humanString.charCodeAt(i)).toString(16);
       hexString+=hex;
@@ -553,7 +551,7 @@ import { commitAllWithStart } from "../components/commitAll";
     for(let i =0; i< inputKey.length; i++){
      if(oldAsciiKeyReplacementDictionary.hasOwnProperty(inputKey[i])){// eslint-disable-line no-use-before-define
       finishedInputKey += oldAsciiKeyReplacementDictionary[inputKey[i]];// eslint-disable-line no-use-before-define
-      console.log('Oldasciireplacement '+ finishedInputKey)
+      console.log('OldAsciiReplacement '+ finishedInputKey)
     } else{
       finishedInputKey += inputKey[i];
     }
@@ -561,12 +559,12 @@ import { commitAllWithStart } from "../components/commitAll";
       finishedInputKey += " + "
     }
   }
-    return finishedInputKey;  
+    return finishedInputKey;
   }
 /*eslint-enable */
 
   export function convertHumanStringToHexadecimalChord(humanString: string) : string{
-  
+
     console.log(humanString);
     let hexString = "";
     let bigNum = BigInt(0);
@@ -578,7 +576,7 @@ import { commitAllWithStart } from "../components/commitAll";
       part = replaceOldAsciiKeys(part)
       console.log('This is the part '+ part)
       const actionId = _actionMap.indexOf(part);
-      
+
       console.log('ActionID: '+actionId);
       if(MainControls._chordmapId=="CHARACHORDER"){ //charachorder original uses different key map structure
         let keyId: number;
@@ -588,7 +586,7 @@ import { commitAllWithStart } from "../components/commitAll";
         }else{
           keyId = actionId-0x0200; //using the physical key position
         }
-        
+
         console.log(keyId);
         bigNum+=BigInt(noteId_to_chord(keyId));
         console.log(bigNum);
@@ -601,7 +599,7 @@ import { commitAllWithStart } from "../components/commitAll";
         }else{
           keyId = actionId-0x0200; //using the physical key position
         }
-        
+
         console.log(keyId);
         bigNum+=BigInt(2n ** BigInt(keyId));
         console.log(bigNum);
@@ -614,7 +612,7 @@ import { commitAllWithStart } from "../components/commitAll";
     hexString = bigNum.toString(16).toUpperCase();
     hexString = "0".repeat(16-hexString.length)+hexString; //add leading zeros up to 16 characters
     console.log(hexString);
-  
+
     return hexString;
   }
 
@@ -625,14 +623,14 @@ import { commitAllWithStart } from "../components/commitAll";
   export async function readGetOneChordmap(){
     console.log('readGetOneChordmap()');
     const { value } = await MainControls.lineReader.read();
-    const spliter = value.split(' ');
-    console.log(spliter)
+    const splitter = value.split(' ');
+    console.log(splitter)
     if (value) {
-      const arrValue = [...spliter];
+      const arrValue = [...splitter];
       //ascii_to_hexa(arrValue);
       const strValue = arrValue;
       let hexChordString = "";
-      hexChordString = strValue[3]; //Should be 32 chacters at all times
+      hexChordString = strValue[3]; //Should be 32 characters at all times
       let hexAsciiString = "";
       hexAsciiString = strValue[4];
       const strValues = ["","","",""];
@@ -641,11 +639,11 @@ import { commitAllWithStart } from "../components/commitAll";
       strValues[1] = convertHexadecimalPhraseToAsciiString(hexAsciiString);
       strValues[2] = hexChordString;
       strValues[3] = hexAsciiString;
-  
+
       //appendToList(strValues);
       // _chordMaps.push(["0x"+hexChordString,strValues[1]]);
       _chordMaps.push([convertHexadecimalChordToHumanChord(hexChordString),strValues[1]]); //this ultimately isn't used
-  
+
       appendToRow(strValues);
     }
   }
@@ -677,11 +675,11 @@ import { commitAllWithStart } from "../components/commitAll";
 
 
       console.log('HEHEHEHEHEHHEEH '+ myArray)
-  
+
       //appendToList(strValues);
       // _chordMaps.push(["0x"+hexChordString,strValues[1]]);
       _chordLayout.push(value); //this ultimately isn't used
-  
+
       appendLayoutToRow(strValues);
     }
   }
@@ -713,21 +711,21 @@ import { commitAllWithStart } from "../components/commitAll";
 
 
       console.log('HEHEHEHEHEHHEEH '+ myArray)
-  
+
       //appendToList(strValues);
       // _chordMaps.push(["0x"+hexChordString,strValues[1]]);
       _chordLayout.push(value); //this ultimately isn't used
-  
+
       appendLayoutToRow(strValues);
     }
   }
-  
+
   export function appendLayoutToRow(data: string[], isFromFile=false) : any{
     if(data[4] != '2' ){
-      
+
     const dataTable = document.getElementById("layoutDataTable") as HTMLTableElement;
     const row = dataTable.insertRow(-1); //insert row at end of table
-  
+
     const cells :any = [];
     cells.push(row.insertCell(-1)); //0 virtual id
     cells.push(row.insertCell(-1)); //1 chord edit button
@@ -742,7 +740,7 @@ import { commitAllWithStart } from "../components/commitAll";
     cells.push(row.insertCell(-1)); //10 orig hex phrase
    // cells[9].innerHTML = data[2];
    // cells[10].innerHTML = data[3];
-  
+
     const btnEdit = document.createElement('div');
     const chordTextOrig = document.createElement('div');
     const phraseTextOrig = document.createElement('div');
@@ -751,14 +749,14 @@ import { commitAllWithStart } from "../components/commitAll";
     const btnDelete = document.createElement('input');
     const btnRevert = document.createElement('input');
     const btnCommit = document.createElement('input');
-    
-  
+
+
     const virtualId = MainControls._chordMapIdCounter;
     console.log("ChordMap Counter: "+virtualId);
     cells[0].innerHTML = virtualId; //local id number
     cells[0].setAttribute('style','border: 1px solid #D3D3D3;');
     MainControls._chordMapIdCounter++;
-  
+
     //btnEdit.id = virtualId.toString()+"-edit";
     //btnEdit.className = "buttonEdit";
     //btnEdit.setAttribute('style', 'background-color: #4CAF50;border: 1px solid white; color: white;padding: 1px 15px;text-align: center;text-decoration: none;display: inline-block; font-size: 16px;');
@@ -767,7 +765,7 @@ import { commitAllWithStart } from "../components/commitAll";
     //cells[1].setAttribute('style','border: 1px solid #D3D3D3;')
 
 
-  
+
     chordTextOrig.id = virtualId.toString()+"-chordorig";
     chordTextOrig.innerHTML = data[1];
     cells[2].appendChild(chordTextOrig);
@@ -788,8 +786,8 @@ import { commitAllWithStart } from "../components/commitAll";
    // cells[4].appendChild(phraseTextInput);
    // cells[4].setAttribute('style','border: 1px solid #D3D3D3; ')
 
-  
-    
+
+
     //phraseTextInput.value = "";
     //cells[5].setAttribute('style', 'color: white; border: 1px solid white;border-right: 1px solid #D3D3D3;');
     //cells[5].appendChild(phraseTextInput);
@@ -800,9 +798,9 @@ import { commitAllWithStart } from "../components/commitAll";
       element.disabled = false;
     }
 
-        
-      
-    
+
+
+
     if(isFromFile){
       phraseTextInput.value = data[1];
     }
@@ -812,7 +810,7 @@ import { commitAllWithStart } from "../components/commitAll";
   export function appendToRow(data: string[], isFromFile=false) : any{
     const dataTable = document.getElementById("dataTable") as HTMLTableElement;
     const row = dataTable.insertRow(-1); //insert row at end of table
-  
+
     const cells :any = [];
     cells.push(row.insertCell(-1)); //0 virtual id
     cells.push(row.insertCell(-1)); //1 chord edit button
@@ -827,7 +825,7 @@ import { commitAllWithStart } from "../components/commitAll";
     cells.push(row.insertCell(-1)); //10 orig hex phrase
    // cells[9].innerHTML = data[2];
    // cells[10].innerHTML = data[3];
-  
+
     const btnEdit = document.createElement('input');
     const chordTextOrig = document.createElement('div');
     const phraseTextOrig = document.createElement('div');
@@ -836,14 +834,14 @@ import { commitAllWithStart } from "../components/commitAll";
     const btnDelete = document.createElement('input');
     const btnRevert = document.createElement('input');
     const btnCommit = document.createElement('input');
-    
-  
+
+
     const virtualId = MainControls._chordMapIdCounter;
     console.log("ChordMap Counter: "+virtualId);
     cells[0].innerHTML = virtualId; //local id number
     cells[0].setAttribute('style','border: 1px solid #D3D3D3;');
     MainControls._chordMapIdCounter++;
-  
+
     btnEdit.id = virtualId.toString()+"-edit";
     btnEdit.type = "button";
     btnEdit.className = "buttonEdit";
@@ -857,12 +855,12 @@ import { commitAllWithStart } from "../components/commitAll";
       const btn = document.getElementById(virtualId.toString()+"-edit") as HTMLInputElement;
 
       if(btn.value == "edit chord"){
-        btn.value = "listening";  
+        btn.value = "listening";
         await enableSerialChordOutput(true); //TODO include code to enable raw inputs and detect chord or else timeout
-        
+
         const hexChord = await readGetHexChord(); //TODO enable a timeout to stop listening to read serial
         console.log("Listening Hex Chord "+convertHexadecimalChordToHumanString(hexChord)); //TODO take this hexchord and do something with it
-        
+
         if(hexChord!=null){
             console.log(hexChord + " Original Hex Value")
           const element: HTMLElement = document.getElementById(virtualId.toString()+"-chordnew") as HTMLInputElement; //.innerHTML = "status: opened serial port";
@@ -890,7 +888,7 @@ import { commitAllWithStart } from "../components/commitAll";
       // await enableSerialChordOutput(false); //don't need to call this down here
       btn.value = "edit chord";
     }
-    
+
     chordTextOrig.id = virtualId.toString()+"-chordorig";
     chordTextOrig.innerHTML = replaceOldAsciiKeys(data[0]);
     console.log('Output of current chord '+ data)
@@ -911,7 +909,7 @@ import { commitAllWithStart } from "../components/commitAll";
     phraseTextInput.setAttribute("type", "text");
     phraseTextInput.setAttribute("style", "color:black");
 
-    
+
     phraseTextInput.value = "";
     cells[5].setAttribute('style', 'color: white; border: 1px solid white;border-right: 1px solid #D3D3D3;');
     cells[5].appendChild(phraseTextInput);
@@ -921,7 +919,7 @@ import { commitAllWithStart } from "../components/commitAll";
       const element: HTMLInputElement = document.getElementById(virtualId.toString()+"-commit") as HTMLInputElement; //.innerHTML = "status: opened serial port";
       element.disabled = false;
     }
-  
+
     btnDelete.id = virtualId.toString()+"-delete";
     btnDelete.type = "button";
     btnDelete.className = "buttonDelete";
@@ -939,7 +937,7 @@ import { commitAllWithStart } from "../components/commitAll";
       const elementCommit: HTMLInputElement = document.getElementById(virtualId.toString()+"-commit") as HTMLInputElement; //.innerHTML = "status: opened serial port";
       elementCommit.disabled = false;
     }
-  
+
     btnRevert.id = virtualId.toString()+"-revert";
     btnRevert.type = "button";
     btnRevert.className = "buttonRevert";
@@ -958,7 +956,7 @@ import { commitAllWithStart } from "../components/commitAll";
       const elementCommit: HTMLInputElement = document.getElementById(virtualId.toString()+"-commit") as HTMLInputElement;
       elementCommit.disabled = true;
     }
-  
+
     btnCommit.id = virtualId.toString()+"-commit";
     btnCommit.type = "button";
     btnCommit.className = "buttonCommit";
@@ -1000,7 +998,7 @@ import { commitAllWithStart } from "../components/commitAll";
 
             //then delete the old chordmap          const phraseinput: HTMLInputElement = document.getElementById(virtualId.toString()+"-phraseinput") as HTMLElement; //.innerHTML = "status: opened serial port";
             const chordorig: HTMLInputElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLInputElement; //.innerHTML = "status: opened serial port";
-           
+
             const hexChordOrigToDelete = await convertHumanChordToHexadecimalChord(chordorig.innerHTML);
             await sendCommandString("CML C4 "+hexChordOrigToDelete);
             await readGetOneAndToss();
@@ -1021,7 +1019,7 @@ import { commitAllWithStart } from "../components/commitAll";
 
             const s = elementPhase.innerHTML.split(",");
            // await sendCommandString('');
-            
+
             await sendCommandString('VAR '+'B4 '+'A'+element.innerHTML+" "+ s[0] + ' '+ s[1]);
             await readGetOneAndToss();
             //then delete the old chordmap
@@ -1046,11 +1044,11 @@ import { commitAllWithStart } from "../components/commitAll";
 
           if(check2.value.length>0){
             //if just the phrase was changed, then update the chordmap with the original chord and new phrase
-            const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port"; 
+            const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port";
             const phraseinput5: HTMLInputElement = document.getElementById(virtualId.toString()+"-phraseinput") as HTMLInputElement;; //.innerHTML = "status: opened serial port";
             const hexChord = await convertHumanChordToHexadecimalChord(chordorig.innerHTML);
             const hexPhrase = await convertHumanPhraseToHexadecimalPhrase(phraseinput5.value);
-            
+
             //await selectBase(); //make sure we're in the BASE dictionary
             await sendCommandString("CML C3 "+hexChord+" "+hexPhrase);
 
@@ -1095,9 +1093,9 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
       return result;
   })
 }
-  
+
   export async function clickCommit(virtualId){
-    
+
     const check: HTMLInputElement = document.getElementById(virtualId.toString()+"-delete") as HTMLInputElement;
        // const commitButton = document.getElementById(virtualId.toString()+"-commit");
 
@@ -1133,7 +1131,7 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
 
           //then delete the old chordmap          const phraseinput: HTMLInputElement = document.getElementById(virtualId.toString()+"-phraseinput") as HTMLElement; //.innerHTML = "status: opened serial port";
           const chordorig: HTMLInputElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLInputElement; //.innerHTML = "status: opened serial port";
-         
+
           const hexChordOrigToDelete = await convertHumanChordToHexadecimalChord(chordorig.innerHTML);
           await sendCommandString("CML C4 "+hexChordOrigToDelete);
           //await readGetOneAndToss();
@@ -1155,7 +1153,7 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
 
           const s = elementPhase.innerHTML.split(",");
          // await sendCommandString('');
-          
+
           await sendCommandString('VAR '+'B4 '+'A'+element.innerHTML+" "+ s[0] + ' '+ s[1]);
           //await readGetOneAndToss();
           //then delete the old chordmap
@@ -1180,11 +1178,11 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
 
         if(check2.value.length>0){
           //if just the phrase was changed, then update the chordmap with the original chord and new phrase
-          const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port"; 
+          const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port";
           const phraseinput5: HTMLInputElement = document.getElementById(virtualId.toString()+"-phraseinput") as HTMLInputElement;; //.innerHTML = "status: opened serial port";
           const hexChord = await convertHumanChordToHexadecimalChord(chordorig.innerHTML);
           const hexPhrase = await convertHumanPhraseToHexadecimalPhrase(phraseinput5.value);
-          
+
           //await selectBase(); //make sure we're in the BASE dictionary
           console.log('Chord Original '+ chordorig);
           await sendCommandString("CML C3 "+hexChord+" "+hexPhrase);
@@ -1212,7 +1210,7 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
 
   export function pressCommitButton(virtualId: { toString: () => string; }){
     const commitButton = document.getElementById(virtualId.toString()+"-commit");
-    //onst myTimeout = await setTimeout(pressCommitButton,virtualId*10000,virtualId);//Fiddle with this
+    //const myTimeout = await setTimeout(pressCommitButton,virtualId*10000,virtualId);//Fiddle with this
     //myTimeout.
     clickCommit(virtualId);
     //clearTimeout(myTimeout);
@@ -1224,7 +1222,7 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
     if(commitButton.disabled==false){
       commitButton.click();
     }
-    const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port"; 
+    const chordorig: HTMLElement = document.getElementById(virtualId.toString()+"-chordorig") as HTMLElement; //.innerHTML = "status: opened serial port";
     const phraseinput5: HTMLInputElement = document.getElementById(virtualId.toString()+"-phraseinput") as HTMLInputElement;; //.innerHTML = "status: opened serial port";
     const hexChord =  await convertHumanChordToHexadecimalChord(chordorig.innerHTML);
     const hexPhrase = await convertHumanPhraseToHexadecimalPhrase(phraseinput5.value);
@@ -1237,17 +1235,17 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
     console.log("convertHumanChordToHexadecimalChord()");
     console.log(humanChord);
     let hexChord = "";
-    
+
     const humanChordParts = humanChord.split(' + '); //somewhat assumes plus isn't being used; bc default is = for the +/= key
     const decChordParts=[]
     humanChordParts.forEach( (part)=>{
       const actionCode = actionMap.indexOf(part);
 
         //const actionCode = part.charCodeAt(0); //TODO pull from actionCodesMap instead of ASCII
-        actionCode == -1 ? console.log('ActionCode does not exisit') : decChordParts.push(actionCode);
+        actionCode == -1 ? console.log('ActionCode does not exist') : decChordParts.push(actionCode);
     });
 
-    decChordParts.sort(function(a, b){return b - a}); // This sorts the parts of the chod in decensing order
+    decChordParts.sort(function(a, b){return b - a}); // This sorts the parts of the chord in descending order
 
 
     const chainIndex = 0; //to be developed later
@@ -1272,15 +1270,15 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
     console.log("convertHumanPhraseToHexadecimalPhrase()");
     console.log(humanPhrase);
     let hexPhrase = "";
-    
+
     //TODO split by ' + ' and detect if it is ascii or not
-    for (let i=0; i<humanPhrase.length; i ++) 
+    for (let i=0; i<humanPhrase.length; i ++)
     {
         const actionCode = humanPhrase.charCodeAt(i); //TODO look up in actionCodeMap
         const hexPhrasePart = pad(Dec2Hex(actionCode),2); //convert the actionCode to a hex string and pad with zeros
         hexPhrase+=hexPhrasePart; //append to final hexadecimal string
     }
-    hexPhrase = hexPhrase.toUpperCase(); //conver to uppercase
+    hexPhrase = hexPhrase.toUpperCase(); //convert to uppercase
     console.log('This is the hex human phrase '+hexPhrase);
     return hexPhrase;
 }
@@ -1288,4 +1286,3 @@ export const asyncCallWithTimeout = async (asyncPromise, timeLimit, virtualId) =
  export async function readGetNone(){
    console.log(' ');
   }
-  

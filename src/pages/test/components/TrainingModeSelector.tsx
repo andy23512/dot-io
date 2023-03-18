@@ -1,11 +1,10 @@
 import React, { ReactElement, useState } from 'react';
-import { useStoreActions, useStoreState } from '../../../store/store';
-import styled from 'styled-components';
-import { isNumber } from 'lodash';
 import type { TrainingLevels } from 'src/models/trainingLevels';
-import {connectDeviceAndPopUp} from '../../../../src/pages/manager/components/connect';
+import styled from 'styled-components';
+import { connectDeviceAndPopUp } from '../../../../src/pages/manager/components/connect';
 import { getId } from '../../../../src/pages/manager/components/getID';
 import { useWordsPerMinute } from '../../../hooks/useWordsPerMinute';
+import { useStoreActions, useStoreState } from '../../../store/store';
 
 
 export function TrainingModeSelector(): ReactElement {
@@ -16,10 +15,10 @@ export function TrainingModeSelector(): ReactElement {
   const trainingLevel = useStoreState((store: any) => store.trainingLevel);
   const moduleNumber = useStoreState((store: any) => store.moduleNumber);
   const setModuleNumber = useStoreActions((store: any) => store.setModuleNumber);
-  const setDownloadModulModalToggle = useStoreActions((store : any) => store.setDownloadModulModalToggle);
+  const setDownloadModuleModalToggle = useStoreActions((store : any) => store.setDownloadModuleModalToggle);
   const wpm = useWordsPerMinute();
-  
-  const [checkIfUserChangedLevels, setCheckIfUserChangedLevels] = useState('CPM' as TrainingLevels); 
+
+  const [checkIfUserChangedLevels, setCheckIfUserChangedLevels] = useState('CPM' as TrainingLevels);
 
 
 
@@ -30,11 +29,11 @@ export function TrainingModeSelector(): ReactElement {
     beginTraining(payload);
   }
   function allChords(){
-    const doesLibrayExist = localStorage.getItem('chordsReadFromDevice')
+    const doesLibraryExist = localStorage.getItem('chordsReadFromDevice')
     const id = getId()
-    if (id !=null && doesLibrayExist == undefined || null){
+    if (id !=null && doesLibraryExist == undefined || null){
       connectDeviceAndPopUp()
-      setDownloadModulModalToggle(true as boolean);
+      setDownloadModuleModalToggle(true as boolean);
     } else{
       LearnPageFunction('ALLCHORDS')
     }
@@ -49,7 +48,7 @@ export function TrainingModeSelector(): ReactElement {
     sessionStorage.setItem("CustomNonRefresh", JSON.stringify(1))
     sessionStorage.removeItem("tempTestDeIncrement");
     beginTraining(payload);
- 
+
   }
   function whatModuleSelectionToShow(){
     if(checkIfUserChangedLevels != trainingLevel){
@@ -98,7 +97,7 @@ display: flex;
 color: white;
 position: relative;
 flex-direction: row;
-padding: '1rem';  
-justify-content: center; 
-align-items: center; 
+padding: '1rem';
+justify-content: center;
+align-items: center;
 `

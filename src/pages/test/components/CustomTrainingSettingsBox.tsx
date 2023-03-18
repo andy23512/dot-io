@@ -5,7 +5,6 @@ import usePopover from '../../../hooks/usePopover';
 import type { TrainingSettingsState } from '../../../models/trainingSettingsStateModel';
 import { useStoreState } from '../../../store/store';
 import HelpCircleIcon from './HelpCircleIcon';
-import { wpmMethodCalculator } from '../../../../src/helpers/aggregation';
 
 export interface SettingsProps {
   trainingSettings: TrainingSettingsState;
@@ -48,8 +47,8 @@ export function CustomTrainingSettingsBox(props: SettingsProps): JSX.Element {
       'How many chords do you want to target to get better at through practice?',
     );
 
-  const { parentProps: speedGoalProps, Popper: SpeelGoalPopover } = usePopover(
-    'How fast do you want to type each chord? This is measured in hundreths of a second, so a speed goal of 100 would equate to 1 second.',
+  const { parentProps: speedGoalProps, Popper: SpeedGoalPopover } = usePopover(
+    'How fast do you want to type each chord? This is measured in hundredths of a second, so a speed goal of 100 would equate to 1 second.',
   );
 
   const { parentProps: recursionRateProps, Popper: RecursionRatePopover } =
@@ -100,7 +99,7 @@ export function CustomTrainingSettingsBox(props: SettingsProps): JSX.Element {
         <Label {...speedGoalProps}>
           Speed Goal
           <HelpCircleIcon />
-          {SpeelGoalPopover}
+          {SpeedGoalPopover}
         </Label>
         <Input
           onBlur={(e) => {

@@ -19,8 +19,8 @@ export interface StatisticsStoreActions {
     StatisticsStore,
     Record<TrainingScenario, number>
   >;
- 
-  setfastestRecordedWordsPerMinuteGraph: Action<string[][]>;
+
+  setFastestRecordedWordsPerMinuteGraph: Action<string[][]>;
 
 }
 

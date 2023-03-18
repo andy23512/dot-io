@@ -1,7 +1,6 @@
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import NextTestButton from '../../../../src/pages/test/components/NextTestButton';
-import RefreshButton from '../../../../src/pages/test/components/RefreshButton';
 
 
 export function TestControlRow(): ReactElement {
@@ -13,13 +12,13 @@ export function TestControlRow(): ReactElement {
             <ItemsContainer>
       <NextTestButton />
          </ItemsContainer>
-      </RowContainer>    
-       <TeirSelector/>
+      </RowContainer>
+       <TierSelector/>
        </React.Fragment>
       );
   }
 
-  const TeirSelector = styled.div `
+  const TierSelector = styled.div `
 background-color: #181818;
 height: 60px;
 min-width: 100%;
@@ -31,9 +30,9 @@ min-width: 100%;
   display: flex;
   position: relative;
   flex-direction: row;
-  padding: '1rem';  
-  justify-content: center; 
-  align-items: center; 
+  padding: '1rem';
+  justify-content: center;
+  align-items: center;
   `
   const RowContainer = styled.div `
 background-color: #181818;

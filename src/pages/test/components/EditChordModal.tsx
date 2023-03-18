@@ -1,17 +1,16 @@
-import React, { ReactElement, useRef, useState, useEffect } from 'react';
+import React, { ReactElement, useRef, useState } from 'react';
 import { Portal } from 'react-portal';
 import styled from 'styled-components';
-import { chordLibrary, ChordLibraryRecord } from '../../../data/chordLibrary';
+import { ChordLibraryRecord, chordLibrary } from '../../../data/chordLibrary';
 import { useCurrentTrainingScenario } from '../../../hooks/useCurrentTrainingScenario';
 import usePopover from '../../../hooks/usePopover';
+import { pickerLite, pickerV1 } from '../../../models/keyboardDropDownFolder/keyboardDropDown';
 import type { TrainingScenario } from '../../../models/trainingScenario';
 import { useStoreActions, useStoreState } from '../../../store/store';
 import { getGlobalDictionaries, setGlobalDictionaries } from '../../../store/trainingStore/actions';
 import HelpCircleIcon from './HelpCircleIcon';
 import { ThirdButton } from './ThirdButton';
 import { XIcon } from './XIcon';
-import {pickerV1, pickerLite} from '../../../models/keyboardDropDownFolder/keyboardDropDown';
-import type { ChordStatisticsFromDevice } from '../../../models/trainingStatistics';
 
 export const triggerResizeForChordModal = () => {
   // This is done to make sure that the popover elements are in the correct position
@@ -81,7 +80,7 @@ function EditChordsModal(): ReactElement {
       setTempChords(chords);
       togglePortal();
       setInputValue('');
-    
+
   };
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -99,16 +98,16 @@ function EditChordsModal(): ReactElement {
 
 
    const confirmEditing = async () => {
-    sessionStorage.removeItem("CutomTierTestValue");
+    sessionStorage.removeItem("CustomTierTestValue");
     sessionStorage.removeItem("tempTestDeIncrement");
     //console.log('Here is where this is being called');
-    
+
     if (typeof trainingScenario === "string")
       setGlobalDictionaries({
         ...getGlobalDictionaries(),
         [trainingScenario]: generateNewChordRecord(tempChords),
       });
-      
+
     let chordsToUse = [];
     const shouldGroupChords = trainingScenario === 'SUPERSONIC';
     if (shouldGroupChords) chordsToUse = groupIntoPairs(tempChords);
@@ -152,10 +151,10 @@ function EditChordsModal(): ReactElement {
 
   return (
     <div>
-    
+
       {isShowingPortal && (
         <Portal>
-        {(isShowingPortal && (sessionStorage.getItem('Refresh')!=undefined)) ? [confirmEditing] : 
+        {(isShowingPortal && (sessionStorage.getItem('Refresh')!=undefined)) ? [confirmEditing] :
           <div
             onClick={cancelEditing}
             className="fixed inset-0 width-screen height-screen bg-opacity-70 bg-black flex items-center justify-center"
@@ -215,7 +214,7 @@ function EditChordsModal(): ReactElement {
 }
         </Portal>
       )}
-    </div>   
+    </div>
     );
 }
 
@@ -284,7 +283,7 @@ export const generateNewChordRecordForAllChordsModule = (chords): ChordLibraryRe
 
 export const getChordLibraryForTrainingScenario = (
   scenario?: TrainingScenario | undefined,
-  chordRepresention?: ChordLibraryRecord | undefined,
+  chordRepresentation?: ChordLibraryRecord | undefined,
 ): Record<string, string[]> | undefined => {
   const allChord = JSON?.parse(localStorage?.getItem('chordsReadFromDevice'));
   if (scenario === 'ALPHABET') return chordLibrary.letters;
@@ -296,9 +295,9 @@ export const getChordLibraryForTrainingScenario = (
   else if (scenario === 'LEXICOGRAPHIC') return chordLibrary.lexicographic;
   else if (scenario === 'SUPERSONIC') return chordLibrary.supersonic;
   else if (scenario === 'LEXICALSENTENCES') return chordLibrary.lexicalSentences;
-  else if (scenario === 'ALLCHORDS'){ 
-    console.log(chordRepresention)
-    return chordRepresention
+  else if (scenario === 'ALLCHORDS'){
+    console.log(chordRepresentation)
+    return chordRepresentation
   };
 
   return undefined;

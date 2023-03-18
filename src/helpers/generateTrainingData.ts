@@ -1,9 +1,7 @@
-import type { ChordLibraryRecord } from '../data/chordLibrary';
-import type { ChordStatistics, ChordStatisticsFromDevice } from '../models/trainingStatistics';
 import type { WordTrainingValues } from 'src/models/wordTrainingValues';
-import { useEffect, useRef, useState  } from 'react';
+import type { ChordLibraryRecord } from '../data/chordLibrary';
 import type { TrainingScenario } from '../models/trainingScenario';
-import { useStoreActions, useStoreState } from 'easy-peasy';
+import type { ChordStatistics, ChordStatisticsFromDevice } from '../models/trainingStatistics';
 import { wpmMethodCalculatorForStoredChords } from './aggregation';
 
 const getRandomElementFromArray = <T>(list: T[]): T =>
@@ -37,7 +35,7 @@ interface ChordGenerationParameters {
  */
 
 //This checks if the page has been reloaded this will be used to refresh the session variable
- let pageAccessedByReload = ( 
+ let pageAccessedByReload = (
   (window.performance.navigation && window.performance.navigation.type === 1) ||
     window.performance
       .getEntriesByType('navigation')
@@ -45,7 +43,7 @@ interface ChordGenerationParameters {
       .includes('reload')
 );
 //Method to remove session value and set refresh constant back to false
-function removeSessionValueAndSettoFalse(){ 
+function removeSessionValueAndSetToFalse(){
   sessionStorage.removeItem("tempTestDeIncrement");
 
   pageAccessedByReload = false;
@@ -57,8 +55,8 @@ export const generateChords = (
   if((parameters.scenario == 'LEXICAL') && (parameters.wordTestNumberValue != undefined)){
 
     const wordTestValue = parseInt(parameters.wordTestNumberValue);
-    pageAccessedByReload ? removeSessionValueAndSettoFalse() : ''; // Call this incase user refreshed the page mid test to reset the session Variable
-    
+    pageAccessedByReload ? removeSessionValueAndSetToFalse() : ''; // Call this incase user refreshed the page mid test to reset the session Variable
+
     const chordLibraryCharacters1 = Object.keys(parameters.chordsToChooseFrom);
 
     const fullTestData = [];
@@ -69,7 +67,7 @@ export const generateChords = (
 
 
     let tempDeIncrementValue = parseInt(sessionStorage.getItem("tempTestDeIncrement"));
-    
+
     const newString : string[] = [];
 
     while (newString.join('').length < parameters.lineLength) {
@@ -108,14 +106,14 @@ export const generateChords = (
   const chordLibraryCharacters = Object.keys(parameters.chordsToChooseFrom);
 
   const wordTestValue = chordLibraryCharacters.length;
-  pageAccessedByReload ? removeSessionValueAndSettoFalse() : ''; // Call this incase user refreshed the page mid test to reset the session Variable
+  pageAccessedByReload ? removeSessionValueAndSetToFalse() : ''; // Call this incase user refreshed the page mid test to reset the session Variable
    const checkVal = sessionStorage.getItem("tempTestDeIncrement")
    if(sessionStorage.getItem("tempTestDeIncrement") == undefined ||isNaN(parseInt(sessionStorage.getItem("tempTestDeIncrement")))){
 
     sessionStorage.setItem("tempTestDeIncrement", JSON.stringify(wordTestValue));
     localStorage.setItem('chordsToChooseFrom', JSON.stringify(chordLibraryCharacters));
     }
-   sessionStorage.setItem("CutomTierTestValue", JSON.stringify(wordTestValue))
+   sessionStorage.setItem("CustomTierTestValue", JSON.stringify(wordTestValue))
    let tempDeIncrementValue = parseInt(sessionStorage.getItem("tempTestDeIncrement"));
 
   while (allCharacters.join('').length < parameters.lineLength) {
@@ -129,7 +127,7 @@ export const generateChords = (
       if(loopValue !< 0){
       for(let i =0; i<=loopValue; i++){
         allCharacters.pop();
-      
+
       }
     }
       break;
@@ -146,14 +144,14 @@ export const generateChords = (
   // * Uncomment the next two lines to use just the alphabet to test with
     // const IS_TESTING = true;
     // if (IS_TESTING) return [...'abcdefghijklmnopqrstuvwxyz'.split('')];
-  
-  
+
+
     const chordToFeed = '';
-  
-  
+
+
     const allCharacters: string[] = [chordToFeed].filter((a) => !!a);
-  
-  
+
+
     const chordLibraryCharacters = Object.keys(parameters.chordsToChooseFrom);
     //console.log(chordLibraryCharacters)
 
@@ -182,7 +180,7 @@ export const generateChords = (
         allCharacters.push(
           getRandomElementFromArray(finalChordsToUse),
         );
-  
+
       }
       else allCharacters.push(getRandomElementFromArray(chordLibraryCharacters));
     }
@@ -190,7 +188,7 @@ export const generateChords = (
       parameters.storedTestData?.push(allCharacters[i]);
     }
     return allCharacters;
-  
+
   } else {
   // * Uncomment the next two lines to use just the alphabet to test with
   // const IS_TESTING = true;
@@ -226,13 +224,13 @@ export const generateChords = (
     (a, b) => b.averageSpeed - a.averageSpeed,
   );
   const allCharacters: string[] = [chordToFeed].filter((a) => !!a);
-  allCharacters.shift(); // This removes the first letter in the array so that in the alphabetic tier we only show the first 8 letters on the intial data set load
+  allCharacters.shift(); // This removes the first letter in the array so that in the alphabetic tier we only show the first 8 letters on the initial data set load
   for(let i=0; i < theCondensedChordStat.length; i++ ){
     if((theCondensedChordStat[i].averageSpeed > parameters.speedGoal) && (theCondensedChordStat[i].numberOfOccurrences >= 10)){
       theCondensedChordStat.push(theCondensedChordStat.splice(theCondensedChordStat.indexOf(theCondensedChordStat[i]), 1)[0]);
     }
   }
-  
+
   theCondensedChordStat = theCondensedChordStat.sort(
     (a, b) => b.numberOfOccurrences - a.numberOfOccurrences,
   );

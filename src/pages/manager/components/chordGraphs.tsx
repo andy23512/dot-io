@@ -1,4 +1,4 @@
-import  ApexCharts from 'apexcharts';
+import ApexCharts from 'apexcharts';
 import React, { ReactElement } from 'react';
 import styled from 'styled-components';
 import usePopover from '../../../hooks/usePopover';
@@ -21,7 +21,7 @@ export function storeData(data:any, dateData:any){
   const currentDate = new Date();
   const date = currentDate.getDate();
 
- 
+
 
 if(((localStorage.getItem('topWPMDate'))==null)){
     localStorage.setItem("topWPMDate", JSON.stringify(date));
@@ -35,7 +35,7 @@ if(((localStorage.getItem('topWPMDate'))==null)){
  if((parseInt(localStorage.getItem("topWPMDate")) - date) == 0){
   const ge2 = localStorage.getItem("wpmGraphDate");
   const ge = localStorage.getItem("wpmGraphWPM");
-  
+
   const wpmData = JSON.parse(ge);
   const dateD = JSON.parse(ge2);
 
@@ -52,7 +52,7 @@ if(((localStorage.getItem('topWPMDate'))==null)){
 
   const ge2 = localStorage.getItem("wpmGraphDate");
   const ge = localStorage.getItem("wpmGraphWPM");
-  
+
   const wpmData = JSON.parse(ge);
   const dateD = JSON.parse(ge2);
 
@@ -63,7 +63,7 @@ if(((localStorage.getItem('topWPMDate'))==null)){
   localStorage.setItem("wpmGraphDate", JSON.stringify(dateD));
 
  }
-} if((JSON.parse(localStorage.getItem("topWPMDate")!= null)) &&(parseInt(JSON.parse(localStorage.getItem("theDate"))) != parseInt(JSON.parse(localStorage.getItem("topWPMDate"))))){ // This pushes the previous wpm for the new date to ensure the graph flows  
+} if((JSON.parse(localStorage.getItem("topWPMDate")!= null)) &&(parseInt(JSON.parse(localStorage.getItem("theDate"))) != parseInt(JSON.parse(localStorage.getItem("topWPMDate"))))){ // This pushes the previous wpm for the new date to ensure the graph flows
   //console.log('Entered the last else statement');
 
   const ge2 = localStorage.getItem("wpmGraphDate");
@@ -82,9 +82,9 @@ if(((localStorage.getItem('topWPMDate'))==null)){
 
 }
 }
-  
 
-export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdValue: number, inAvgChordCount: string | number | null | undefined){
+
+export function storeAverageData(avgData: number ,dateD: Date, inChordMasteredValue: number, inAvgChordCount: string | number | null | undefined){
   const avgGraphWPM = [];
   const avgGraphDate = [];
   const masteredCounterArray: unknown =  [];
@@ -94,10 +94,10 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
 
   const checkInDate = localStorage.getItem("theDate");
   const ifCheckInDate = JSON.parse(checkInDate);
-  
+
   //Checks to see if there is not theDate object in local storage or is he date is more that -2 daa
   if((localStorage.getItem("theDate")==null)){
-    
+
     //These two if statements work on the avg counter
     if(localStorage.getItem("averageChordCounter")==null){
       localStorage.setItem("averageChordCounter",JSON.stringify(masteredCounterArray));
@@ -119,7 +119,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
 
     const getCounterFromLocal = localStorage.getItem("count");
     const getDailyWPM = localStorage.getItem("dailyWPMAVG");
-    
+
     let parsedCounterFromLocal = JSON.parse(getCounterFromLocal);
     let dailyWPM = JSON.parse(getDailyWPM);
 
@@ -130,7 +130,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
     storeData(avgData, dateD); //Call the StoreData method to add StoreData value to graph
     localStorage.setItem("streak", JSON.stringify(streak));
 
-    dailyWPM =+ avgData; 
+    dailyWPM =+ avgData;
     avgGraphWPM.push(avgData);
     avgGraphDate.push(dateD);
     localStorage.setItem("theDate", JSON.stringify(date));
@@ -138,7 +138,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
     localStorage.setItem("avgGraphDate", JSON.stringify(avgGraphDate));
     localStorage.setItem("dailyWPMAVG", JSON.stringify(dailyWPM));
 
-  
+
 
   }else {
     if(((date-ifCheckInDate)>=2)||((date-ifCheckInDate)<=-2)){
@@ -147,36 +147,36 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
       }else{
         localStorage.setItem('averageCount', JSON.stringify(0))
       }
-      
-   
+
+
       localStorage.setItem("averageChordCounter",JSON.stringify(0));
       localStorage.setItem("prevAverageChordCounter",JSON.stringify(6));
-      
-  
+
+
       localStorage.setItem("count", JSON.stringify(0));
       localStorage.setItem("dailyWPMAVG", JSON.stringify(0));
-  
-  
+
+
       const getCounterFromLocal = localStorage.getItem("count");
       const getDailyWPM = localStorage.getItem("dailyWPMAVG");
 
       const avgGetGD = localStorage.getItem("avgGraphDate");
       const avgGetGW = localStorage.getItem("avgGraphWPM");
-      
+
       const avgDData = JSON.parse(avgGetGD);
       const avgWData = JSON.parse(avgGetGW);
-      
+
       let parsedCounterFromLocal = JSON.parse(getCounterFromLocal);
       let dailyWPM = JSON.parse(getDailyWPM);
-  
+
         parsedCounterFromLocal++;
         localStorage.setItem("count", JSON.stringify(parsedCounterFromLocal));
-  
+
       const streak = 0;//Set the daily streak to 0 if a day has been missed
       storeData(avgData, dateD); //Call the StoreData method to add StoreData value to graph
       localStorage.setItem("streak", JSON.stringify(streak));
-  
-      dailyWPM =+ avgData; 
+
+      dailyWPM =+ avgData;
       avgWData.push(avgData);
       avgDData.push(dateD);
       localStorage.setItem("theDate", JSON.stringify(date));
@@ -186,9 +186,9 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
     }
 
     else if(date-(parseInt(localStorage.getItem("theDate"))) == 1){
-     
-      
-      //Checks if the wpm is over 100, if the current value is not equal to the previous to prevent double counting and ensures this wasnt completed in 1 decisecond  
+
+
+      //Checks if the wpm is over 100, if the current value is not equal to the previous to prevent double counting and ensures this wasn't completed in 1 decisecond
       if(inAvgChordCount!= localStorage.getItem("prevAverageChordCounter")){
         let avgCount = JSON.parse(localStorage.getItem("averageChordCounter"));
         let prevAvgCount = JSON.parse(localStorage.getItem("prevAverageChordCounter"));
@@ -203,8 +203,8 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
 
       localStorage.setItem("averageChordCounter",JSON.stringify(0));
       localStorage.setItem("prevAverageChordCounter",JSON.stringify(6));
-      
-     
+
+
       localStorage.setItem("count", JSON.stringify(0));//Set AVG counter to 0
       localStorage.setItem("dailyWPMAVG", JSON.stringify(0));
 
@@ -212,15 +212,15 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
       const getDailyWPM = localStorage.getItem("dailyWPMAVG");
 
       let parsedCounterFromLocal = JSON.parse(getCounterFromLocal);
-      
+
       parsedCounterFromLocal++;
       localStorage.setItem("count", JSON.stringify(parsedCounterFromLocal));
 
       storeData(avgData, dateD); //Call the StoreData method to add StoreData value to graph if it is a different day
-    
+
       const avgGetGD = localStorage.getItem("avgGraphDate");
       const avgGetGW = localStorage.getItem("avgGraphWPM");
-      
+
       const avgDData = JSON.parse(avgGetGD);
       const avgWData = JSON.parse(avgGetGW);
 
@@ -229,7 +229,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
 
       avgWData.push(Math.round(val));
       avgDData.push(dateD);
-  
+
       localStorage.setItem("avgGraphWPM", JSON.stringify(avgWData));
       localStorage.setItem("avgGraphDate", JSON.stringify(avgDData));
 
@@ -238,10 +238,10 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
 
       localStorage.setItem("streak", JSON.stringify(parseInt(streakVal)+1));
 
-      } 
+      }
       else if((parseInt(localStorage.getItem("theDate")) - date) == 0){ //If it is the same day
         //storeData(avgData, dateD);
-        
+
          //These two if statements work on the avg counter
           if(localStorage.getItem("averageChordCounter")==null){
             localStorage.setItem("averageChordCounter",JSON.stringify(0));
@@ -259,7 +259,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
             localStorage.setItem("prevAverageChordCounter",JSON.stringify(prevAvgCount));
           }
           const avgCount = JSON.parse(localStorage.getItem("averageChordCounter"));
-          
+
       const avgGetGD = localStorage.getItem("avgGraphDate");
       const avgGetGW = localStorage.getItem("avgGraphWPM");
 
@@ -268,7 +268,7 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
       let countCalc = 0;
       Number(parseInt(avgWData[((avgWData.length)-1)])) >=1 ? countCalc =1: ''
       const val = (Number(avgData) + Number((avgWData[((avgWData.length)-1)])))/(1+ countCalc);
-      
+
       console.log('THis is the stats '+ avgCount + ' '+ ((avgWData[((avgWData.length)-1)])) + ' '+ avgData + ' '+val);
 
       avgWData.pop();
@@ -284,16 +284,16 @@ export function storeAverageData(avgData: number ,dateD: Date, inChordMasterdVal
       //Nothing
 
     }
-  
+
   }
 
 }
 
-export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
+export function storeMasteredData(dateD: Date, inChordMasteredValue: number) {
   const storeMasteredData = [];
   const storeMasteredDate = [];
   const masteredCounterArray: any = [];
- // console.log(inChordMasterdValue)
+ // console.log(inChordMasteredValue)
 
   const currentDate = new Date();
   const date = currentDate.getDate();
@@ -303,19 +303,19 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
 
   const storedMasterData = JSON.parse(localStorage.getItem("storedMasterData"));
   const storedMasterDate = JSON.parse(localStorage.getItem("storedMasterDate"));
-//We get this information to check if users already have this data to make the graph flush, This is only neccesary because we introduced this later
+//We get this information to check if users already have this data to make the graph flush, This is only necessary because we introduced this later
   const prevStoredAVGWPM = JSON.parse(localStorage.getItem("avgGraphWPM"));
   const prevStoredAVGDate = JSON.parse(localStorage.getItem("avgGraphDate"));
   const prevStoredWPMWPM = JSON.parse(localStorage.getItem("wpmGraphWPM"));
-  if(inChordMasterdValue>=100 && (inChordMasterdValue != JSON.parse(localStorage.getItem("prevMasteredChordVal"))) && (inChordMasterdValue != 6276)){
+  if(inChordMasteredValue>=100 && (inChordMasteredValue != JSON.parse(localStorage.getItem("prevMasteredChordVal"))) && (inChordMasteredValue != 6276)){
   if(((prevStoredWPMWPM != null) || (prevStoredAVGWPM!=null)) && storedMasterData == null) {
     storeMasteredData.push(0);
     //console.log('here');
-    //console.log(inChordMasterdValue);
+    //console.log(inChordMasteredValue);
     storeMasteredDate.push(prevStoredAVGDate[0]);
 
     localStorage.setItem("storedMasterData", JSON.stringify(storeMasteredData));//Stringify and store DataArray in localStorage
-    localStorage.setItem("storedMasterDate", JSON.stringify(storeMasteredDate));//Stringify and store dateArray in localStorage 
+    localStorage.setItem("storedMasterDate", JSON.stringify(storeMasteredDate));//Stringify and store dateArray in localStorage
     localStorage.setItem("prevMasteredChordVal", JSON.stringify(0));//Set previously mastered chord to 0 since we have not mastered any Chords yet
     localStorage.setItem("masteredCount", JSON.stringify(0));//This sets the chords mastered count to 0
     localStorage.setItem("MasteredTheDate", JSON.stringify(date));//This sets the chords mastered count to 0
@@ -325,7 +325,7 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
     storeMasteredData.push(0);//Since this is the first time this is happening push 0 onto the array
     storeMasteredDate.push(dateD);//Since this is the first time this is happening push the current date as the first date
     localStorage.setItem("storedMasterData", JSON.stringify(storeMasteredData));//Stringify and store DataArray in localStorage
-    localStorage.setItem("storedMasterDate", JSON.stringify(storeMasteredDate));//Stringify and store dateArray in localStorage 
+    localStorage.setItem("storedMasterDate", JSON.stringify(storeMasteredDate));//Stringify and store dateArray in localStorage
     localStorage.setItem("prevMasteredChordVal", JSON.stringify(0));//Set previously mastered chord to 0 since we have not mastered any Chords yet
     localStorage.setItem("masteredCount", JSON.stringify(0));//This sets the chords mastered count to 0
     localStorage.setItem("MasteredTheDate", JSON.stringify(date));//This sets the chords mastered count to 0
@@ -333,7 +333,7 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
   }
   //console.log((JSON.parse(localStorage.getItem("storedMasterData"))));
   //console.log((JSON.parse(localStorage.getItem("storedMasterDate"))));
-    if((parseInt(localStorage.getItem("MasteredTheDate")) - date) == 0){ 
+    if((parseInt(localStorage.getItem("MasteredTheDate")) - date) == 0){
         //console.log('I am in the nested if statement ');
         const storedMD = localStorage.getItem("storedMasterData");
         const storedMDa = localStorage.getItem("storedMasterDate");
@@ -346,10 +346,10 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
         let storedPValue = JSON.parse(storedPVal);
         let storedMCount = JSON.parse(storedMC);
 
-        
+
         //console.log(storedMData);
         //console.log(storedMDate);
-        storedPValue = inChordMasterdValue;
+        storedPValue = inChordMasteredValue;
         storedMCount = storedMCount + 1;
 
         storedMData.splice((storedMData.length - 1), 1, (storedMCount));
@@ -383,7 +383,7 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
         storedMCount = storedMCount + 1;
         storedMData.push(storedMCount);
         storedMDate.push(dateD);
-        storedPValue = inChordMasterdValue;
+        storedPValue = inChordMasteredValue;
         storedMCount = storedMCount + 1;
 
         localStorage.setItem("storedMasterData", JSON.stringify(storedMData));
@@ -393,8 +393,8 @@ export function storeMasteredData(dateD: Date, inChordMasterdValue: number) {
         localStorage.setItem("MasteredTheDate", JSON.stringify(date));//This sets the most recent Date count to 0
 
       }
-   
-  
+
+
 }
 
 }
@@ -416,7 +416,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
   //console.log(storedCharactersPerMinuteDate);
 
 
-//We get this information to check if users already have this data to make the graph flush, This is only neccesary because we introduced this later
+//We get this information to check if users already have this data to make the graph flush, This is only necessary because we introduced this later
   const prevStoredW= JSON.parse(localStorage.getItem("wpmGraphDate"));
   const prevStoredAVGDate = JSON.parse(localStorage.getItem("avgGraphDate"));
   const prevStoredWPMWPM = JSON.parse(localStorage.getItem("wpmGraphWPM"));
@@ -428,7 +428,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
     //console.log(storeCharactersPerMinuteDate)
 
     localStorage.setItem("storedCharactersPerMinuteData", JSON.stringify(storeCharactersPerMinuteData));//Stringify and store DataArray in localStorage
-    localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storeCharactersPerMinuteDate));//Stringify and store dateArray in localStorage 
+    localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storeCharactersPerMinuteDate));//Stringify and store dateArray in localStorage
     localStorage.setItem("prevCPMVal", JSON.stringify(0));//Set previously mastered chord to 0 since we have not mastered any Chords yet
     localStorage.setItem("CPMCount", JSON.stringify(0));//This sets the chords mastered count to 0
     localStorage.setItem("CPMTheDate", JSON.stringify(date));//This sets the chords mastered count to 0
@@ -440,7 +440,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
     storeCharactersPerMinuteData.push(0);//Since this is the first time this is happening push 0 onto the array
     storeCharactersPerMinuteDate.push(dateD);//Since this is the first time this is happening push the current date as the first date
     localStorage.setItem("storedCharactersPerMinuteData", JSON.stringify(storeCharactersPerMinuteData));//Stringify and store DataArray in localStorage
-    localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storeCharactersPerMinuteDate));//Stringify and store dateArray in localStorage 
+    localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storeCharactersPerMinuteDate));//Stringify and store dateArray in localStorage
     localStorage.setItem("prevCPMVal", JSON.stringify(0));//Set previously mastered chord to 0 since we have not mastered any Chords yet
     localStorage.setItem("CPMCount", JSON.stringify(0));//This sets the chords mastered count to 0
     localStorage.setItem("CPMTheDate", JSON.stringify(date));//This sets the chords mastered count to 0
@@ -448,8 +448,8 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
 
 
   }
-  
-    if((parseInt(localStorage.getItem("CPMTheDate")) - date) == 0){ 
+
+    if((parseInt(localStorage.getItem("CPMTheDate")) - date) == 0){
         const storedMD = localStorage.getItem("storedCharactersPerMinuteData");
         const storedMDa = localStorage.getItem("storedCharactersPerMinuteDate");
         const storedPVal = localStorage.getItem("prevCPMVal");
@@ -476,7 +476,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
 
 
         storedPCValue = inCharPerMinute;
-  
+
         //console.log(storedPCValue);
         //console.log(storedCCount);
         //console.log('Chords per min' + storedCData )
@@ -487,7 +487,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
         storedCData.splice((storedCData.length - 1), 1, (val));
         storedCDate.splice((storedCDate.length - 1), 1, dateD);
         localStorage.setItem("storedCharactersPerMinuteData", JSON.stringify(storedCData));//Stringify and store DataArray in localStorage
-        localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storedCDate));//Stringify and store dateArray in localStorage 
+        localStorage.setItem("storedCharactersPerMinuteDate", JSON.stringify(storedCDate));//Stringify and store dateArray in localStorage
         //localStorage.setItem("prevCPMVal", JSON.stringify(0));//Set previously mastered chord to 0 since we have not mastered any Chords yet
         //localStorage.setItem("CPMCount", JSON.stringify(storedCCount));//This sets the chords mastered count to 0
         localStorage.setItem("CPMTheDate", JSON.stringify(date));//This sets the chords mastered count to 0
@@ -497,7 +497,7 @@ export function storeCharactersPerMinute(dateD: Date, inCharPerMinute: number, i
         console.log(storedCDate)
         console.log(date)
         console.log(avgCount)
-        
+
 
 
       } else {
@@ -599,8 +599,8 @@ export function myGraph(){
         blur: 5,
         opacity: 1
       }
-      
-  
+
+
     },
     colors: ['#22C55E', '#0090FF', 'pink', 'yellow'],
     stroke: {
@@ -703,7 +703,7 @@ export function myGraph(){
       type: "solid",
       fillOpacity: 0.7
     },
-    
+
   };
 
 
@@ -721,7 +721,7 @@ export function myGraph(){
       blur: 5,
       opacity: 1
     }
-    
+
 
   },
   colors: ['#22C55E', '#0090FF', 'pink', 'yellow'],
@@ -832,7 +832,7 @@ export function myGraph(){
     type: "solid",
     fillOpacity: 0.7
   },
-  
+
 };
 
 const chart = new ApexCharts(document.getElementById("timeline-chart"), options);
@@ -861,7 +861,7 @@ function generateDayWiseTimeSeries1() {
 
   //console.log(ge);
   //console.log(ge2);
-  
+
   const currentDate = new Date();
 
  if((parseInt(localStorage.getItem("theDate"))) == null){//If a date doesn't exist
@@ -873,7 +873,7 @@ function generateDayWiseTimeSeries1() {
   if(wpmData != null){
     while (i < wpmData.length) {
       series.push([dateD[i], wpmData[i]]);
-      
+
       i++;
     }
   } else {
@@ -900,7 +900,7 @@ function generateDayWiseTimeSeries2() {
   const series = [];
 
   const currentDate = new Date();
-//If this is called and the expressiton is true this means the user has not attempted a training session. So we add the previously stored data to make the graph flush
+//If this is called and the expression is true this means the user has not attempted a training session. So we add the previously stored data to make the graph flush
  if((parseInt(localStorage.getItem("theDate"))) == null){
   storeAverageData(0, currentDate, 0, 0);
  }
@@ -909,7 +909,7 @@ function generateDayWiseTimeSeries2() {
     while (i < avgWpmData.length) {
 
       series.push([avgDateD[i], avgWpmData[i]]);
-      
+
       i++;
     }
   } else{
@@ -932,7 +932,7 @@ function generateDayWiseTimeSeries3() {
 
   //console.log(ge);
   //console.log(ge2);
-  
+
   const currentDate = new Date();
 
  if((parseInt(localStorage.getItem("theDate"))) == null){//If a date doesn't exist
@@ -968,7 +968,7 @@ function generateDayWiseTimeSeries4() {
 
   //.log(ge);
  // console.log(ge2);
-  
+
   const currentDate = new Date();
 
  if((parseInt(localStorage.getItem("theDate"))) == null){//If a date doesn't exist
@@ -992,7 +992,7 @@ function generateDayWiseTimeSeries4() {
 }
 
 export function Graph(): ReactElement {
-  
+
   const { parentProps: topSpeed, Popper: SpeedPopper } = usePopover(
     'This shows the fastest you have typed in any training module. Get a faster top speed to progress through the training modules',
   );
@@ -1005,17 +1005,17 @@ export function Graph(): ReactElement {
   const { parentProps: practiceStreak, Popper: practicePopper } = usePopover(
     'This shows how many days in a row you have practiced in any training module.',
   );
- 
+
   React.useEffect(() => {
     myGraph()
   }, []);
 
-  
+
   return (
-    
+
     <React.Fragment>
 
-      
+
           {practicePopper}
           {chordsPopper}
           {avgPopper}
@@ -1069,15 +1069,15 @@ export function Graph(): ReactElement {
   })``;
 
   const gridContainer = {
-    display: "flex", 
-    padding: "9.6px", 
-    marginTop: "20px", 
+    display: "flex",
+    padding: "9.6px",
+    marginTop: "20px",
     textAlign: "center"
   }
      const gridItem = {
       flexGrow: "0",
       color: "white",
-    
+
       }
 
       const tableText = {

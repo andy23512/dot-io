@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { getAverageWPM, getHighestWPM, getChordsMastered, getChordsPerMinute } from '../../manager/components/chordGraphs';
 import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { getAverageWPM, getChordsMastered, getChordsPerMinute, getHighestWPM } from '../../manager/components/chordGraphs';
 
 const triggerResize = () => {
   // This is done to make sure that the popover elements are in the correct position
@@ -14,7 +14,7 @@ export class PopUp extends Component {
     toggle: PropTypes.any,
   };
 
-  
+
   handleClick = () => {
     this.props.toggle();
   };
@@ -26,25 +26,25 @@ export class PopUp extends Component {
     const goalChMArray = [];
     const goalACPMArray = [];
 
-    const goaltWPM = document.getElementById('goalWPM');
-    const goalaWPM = document.getElementById('goalAWPM');
+    const goalWPM = document.getElementById('goalWPM');
+    const goalAWPM = document.getElementById('goalAWPM');
     const goalChM = document.getElementById('goalCHM');
-    const goalaCPM = document.getElementById('goalACPM');
+    const goalACPM = document.getElementById('goalACPM');
 
-    const currenttWPM = goaltWPM.value - getHighestWPM();
-    const currentaWPM = goalaWPM.value - getAverageWPM();
+    const currentWPM = goalWPM.value - getHighestWPM();
+    const currentAWPM = goalAWPM.value - getAverageWPM();
     const currentChM = goalChM.value - getChordsMastered();
-    const currentACPM = goalaCPM.value - getChordsPerMinute();
+    const currentACPM = goalACPM.value - getChordsPerMinute();
 
-    
+
 
     localStorage.setItem("storedGoalWPM", JSON.stringify(goalWPMArray));
     localStorage.setItem("storedGoalAWPM", JSON.stringify(goalAWPMArray));
     localStorage.setItem("storedGoalChM", JSON.stringify(goalChMArray));
     localStorage.setItem("storedGoalCPM", JSON.stringify(goalACPMArray));
 
-    goalWPMSet((currenttWPM/12));
-    goalAWPMSet((currentaWPM/12));
+    goalWPMSet((currentWPM/12));
+    goalAWPMSet((currentAWPM/12));
     goalACPMSet((currentACPM/12));
     goalChMSet((currentChM/12));
 
@@ -77,7 +77,7 @@ export class PopUp extends Component {
           <td>tWPM</td>
           <td>{getHighestWPM()}</td>
           <td><input type="number" style={goalIndex} id = "goalWPM"  required/></td>
-          <td id = "realTimeWeeklyValWPM"></td> 
+          <td id = "realTimeWeeklyValWPM"></td>
 
         </tr>
         <tr>
@@ -107,7 +107,7 @@ export class PopUp extends Component {
 
         </div>
       </div>
-      
+
       </React.Fragment>
 
     );
@@ -125,7 +125,7 @@ export default class GoalsButton extends React.Component {
       seen: !this.state.seen
     });
   };
- 
+
   render() {
     return (
       <div>
@@ -134,22 +134,22 @@ export default class GoalsButton extends React.Component {
         </div>
         {this.state.seen ? <PopUp toggle={this.togglePop} /> : null}
       </div>
-    );    
+    );
   }
 }
 
  function dates(current:any) {
-  const week= []; 
+  const week= [];
   // Starting Monday not Sunday
   current.setDate((current.getDate()));
   for (let i = 0; i < 12; i++) {
       week.push(
         convertDate(current)
-      ); 
+      );
       current.setDate(current.getDate() +7);
   }
   localStorage.setItem("storedGoalDate", JSON.stringify(week));
-  return week; 
+  return week;
 
 }
 
@@ -157,7 +157,7 @@ function convertDate(date : Date){
   const month = date.getMonth() + 1; //months from 1-12
   const day = date.getDate();
   const year = date.getFullYear();
-  
+
   const newdate = month + "/" + day + "/" + year;
   return newdate;
 }
@@ -212,8 +212,8 @@ function goalACPMSet(goalV : any){
 }
 
 const modal = {
-    position: "absolute" as const, 
-    zIndex: "1" as const, 
+    position: "absolute" as const,
+    zIndex: "1" as const,
     top: "45%" as const,
     left: "22.5%" as const,
     width: "50%" as const,
@@ -225,15 +225,14 @@ const modal = {
 const modal_content = {
     backgroundColor: "white" as const,
      position: "absolute" as const,
-     top: "20%" as const, 
-     left: "30%" as const, 
-     padding: "20px" as const, 
-     borderRadius: "5px" as const, 
+     top: "20%" as const,
+     left: "30%" as const,
+     padding: "20px" as const,
+     borderRadius: "5px" as const,
      border: "2px solid black" as const
     }
     const goalIndex = {
-      borderRadius: "5px", 
+      borderRadius: "5px",
       border:"1.5px solid black"
     }
 
-      

@@ -1,35 +1,31 @@
 
-import React, { ReactElement, useEffect, useState } from 'react';
-import { FixedSizeList } from 'react-window';
-import type { ChordStatistics } from '../../../models/trainingStatistics';
+import React, { ReactElement } from 'react';
 import styled from 'styled-components';
-import { useStoreState, useStoreActions } from '../../../store/store';
-import useContainerDimensions from '../../../hooks/useContainerDimensions';
-import { TestControlRow } from './testControlsRow';
+import { useStoreActions, useStoreState } from '../../../store/store';
 
 
 
 export function TestStatsCard(): ReactElement {
 
     const beginTraining = useStoreActions((store: any) => store.beginTrainingMode);
-    const trainingSceneario = useStoreState((store) => store.currentTrainingScenario);
+    const trainingScenario = useStoreState((store) => store.currentTrainingScenario);
     const currentWordTestNumber = useStoreState((store) => store.wordTestNumber);
     const currentTrainingSetting = useStoreState((store : any) => store.trainingStatistics);
     const trainingSettings = useStoreState((store) => store.trainingSettings);
     const testNumber = useStoreState((store) => store.wordTestNumber);
     const storedTestTextData = useStoreState((store) => store.storedTestTextData);
-    const alltypedText= useStoreState((store) => store.allTypedCharactersStore); 
-    const testTeirHighestWPM = useStoreState((store) => store.testTeirHighestWPM); 
+    const allTypedText= useStoreState((store) => store.allTypedCharactersStore);
+    const testTierHighestWPM = useStoreState((store) => store.testTierHighestWPM);
 
 
-    
+
 
     const payload = []
     let thisVal = 0;
     let sumOccurrences = 0;
     const oo = [];
     const numberOfWordsChorded = useStoreState((state  : any) => state.numberOfWordsChorded);
-    payload.push(trainingSceneario);
+    payload.push(trainingScenario);
     payload.push(currentWordTestNumber);
 
     currentTrainingSetting.statistics.forEach((d) => {
@@ -40,7 +36,7 @@ export function TestStatsCard(): ReactElement {
     });
     let wordsCorrectCount = 0;
     for(let i=0; i<storedTestTextData.length; i++){
-      if(storedTestTextData[i] == alltypedText[i]?.slice(0, -1)){
+      if(storedTestTextData[i] == allTypedText[i]?.slice(0, -1)){
         wordsCorrectCount++;
       }
     }
@@ -49,11 +45,11 @@ export function TestStatsCard(): ReactElement {
       <React.Fragment>
         <TrainingStatsColumnContainer>
          <StatsCardContainer>
-          <div className='text-6xl'>{testTeirHighestWPM}</div>
+          <div className='text-6xl'>{testTierHighestWPM}</div>
           <h1 className='text-2xl'>CPM</h1>
           </StatsCardContainer>
           <StatsCardContainer>
-          <div className='text-4xl'>{(testTeirHighestWPM/5).toFixed(0)}</div>
+          <div className='text-4xl'>{(testTierHighestWPM/5).toFixed(0)}</div>
           <h1 className='text-lg'>WPM</h1>
           </StatsCardContainer>
           <StatsCardContainer>

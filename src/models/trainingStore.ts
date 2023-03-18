@@ -4,11 +4,11 @@ import type { CharacterEntryMode } from '../helpers/convertStringToKeyHighlightP
 import type { KeyHighlightPosition } from './keyHighlightPositions';
 import type { KeyHighlightPositionLite } from './keyHighlightPositionsCharachorderLite';
 
+import type { TrainingLevels } from './trainingLevels';
 import type { TrainingScenario } from './trainingScenario';
 import type { TrainingSettingsState } from './trainingSettingsStateModel';
 import type { TrainingStatistics } from './trainingStatistics';
 import type { WordTrainingValues } from './wordTrainingValues';
-import type { TrainingLevels } from './trainingLevels';
 
 
 export interface TrainingStoreActionsModel {
@@ -40,8 +40,8 @@ export interface TrainingStoreActionsModel {
   setTrainingLevel: Action<TrainingStoreModel, TrainingLevels>;
   setModuleCompleteModalToggle: Action<TrainingStoreModel, boolean>;
   setModuleNumber: Action<TrainingStoreModel, number>;
-  setDownloadModulModalToggle: Action<TrainingStoreModel, boolean>;
-  setTestTeirHighestWPM: Action<TrainingStoreModel, number>;
+  setDownloadModuleModalToggle: Action<TrainingStoreModel, boolean>;
+  setTestTierHighestWPM: Action<TrainingStoreModel, number>;
   setStoredChordsFromDevice: Action<TrainingStoreModel, number>;
   setStoredChordsRepresentation: Action<TrainingStoreModel, ChordLibraryRecord>;
   setIsDisplayingIntroductionModal: Action<TrainingStoreModel, boolean>;
@@ -115,10 +115,10 @@ export interface TrainingStoreStateModel {
   textPromptUnFocused: boolean;
   numberOfWordsChorded:  number;
   moduleCompleteModalToggle: boolean;
-  downloadModulModalToggle: boolean;
+  downloadModuleModalToggle: boolean;
   wasModuleShown: boolean;
   moduleNumber: number;
-  testTeirHighestWPM: number;
+  testTierHighestWPM: number;
   storedChordsFromDevice: string[];
   storedChordsRepresentation: ChordLibraryRecord;
   isDisplayingIntroductionModal: boolean,

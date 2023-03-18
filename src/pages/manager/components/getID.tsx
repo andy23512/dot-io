@@ -1,6 +1,5 @@
 import React, { ReactElement } from 'react';
-import {_actionMap, _keyMapDefaults} from '../controls/maps'
-import {MainControls, sendCommandString, readGetOneAndToss, readGetOneAndReturnOne} from '../controls/mainControls'
+import { MainControls, readGetOneAndReturnOne, readGetOneAndToss, sendCommandString } from '../controls/mainControls';
 
 
 export async function getId(){
@@ -17,7 +16,7 @@ export async function getId(){
   await sendCommandString("VERSION")
   MainControls._firmwareVersion = await readGetOneAndReturnOne();;
 
-  
+
 
   console.log('Just got here '+ MainControls._chordmapId + ' '+MainControls._firmwareVersion )
   const element: HTMLElement = document.getElementById("statusDiv") as HTMLInputElement;; //.innerHTML = "status: opened serial port";
@@ -45,7 +44,7 @@ export async function getId(){
     // );
     // lineReader = inputStream.getReader();
     // console.log(lineReader);
-  
+
     // await readProcess(linecount);
     // console.log('cancelling reader');
     // await lineReader.cancel().then(()=>{console.log('then cancelled line reader');});
@@ -53,16 +52,16 @@ export async function getId(){
     // await inputDone;
     const { value, done } = await MainControls.lineReader.read();
     if(value){
-      
-      
+
+
       if(value == "chordmaps loaded and ready"){
         console.log("received: chordmaps loaded and ready, so the chord headers are enabled; turning this off");
-        await sendCommandString("SET "+ MainControls.CONFIG_ID_ENABLE_SERIAL_CHORD+" 00"); //disable chordmap outout
+        await sendCommandString("SET "+ MainControls.CONFIG_ID_ENABLE_SERIAL_CHORD+" 00"); //disable chordmap output
         await sendCommandString("ID");
         await readDeviceId();
       }else{
         MainControls._chordmapId = value;
-  
+
         console.log(MainControls._chordmapId);
       }
     }

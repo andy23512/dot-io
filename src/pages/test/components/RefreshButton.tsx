@@ -1,25 +1,24 @@
-import React, {ReactElement} from "react";
+import { useStoreActions, useStoreState } from "easy-peasy";
+import { ReactElement } from "react";
 import RefreshIcon from "./RefreshIcon";
-import ForwardIcon from "./ForwardIcon";
-import { useStoreState, useStoreActions } from "easy-peasy";
 
 
 function RefreshButton(): ReactElement {
 
     const wordTestNumber = useStoreState((store : any) => store.wordTestNumber,);
   const beginTraining = useStoreActions((store: any) => store.beginTrainingMode);
-  const trainingSceneario = useStoreState((store) => store.currentTrainingScenario);
+  const trainingScenario = useStoreState((store) => store.currentTrainingScenario);
   const currentWordTestNumber = useStoreState((store) => store.wordTestNumber);
   const setRestartTestMode = useStoreActions((store) => store.setRestartTestMode,);
   const mode = useStoreState((store) => store.restartTestMode);
 
-  
+
   const payload = [];
-  payload.push(trainingSceneario);
+  payload.push(trainingScenario);
   payload.push(currentWordTestNumber);
   function letsGoAgain() {
     sessionStorage.setItem("Refresh", JSON.stringify(1))
-    sessionStorage.removeItem("CutomTierTestValue");
+    sessionStorage.removeItem("CustomTierTestValue");
     sessionStorage.removeItem("tempTestDeIncrement");
     setRestartTestMode(true);
     beginTraining(payload);

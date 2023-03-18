@@ -1,8 +1,8 @@
 import { createStore, createTypedHooks } from 'easy-peasy';
 import type { CompleteStoreModel } from '../models/storeModel';
+import { GlobalStorageStore } from './globalPersistentStore';
 import { TrainingStorageStore } from './statisticsStorageStore';
 import { TrainingStore } from './trainingStore';
-import { GlobalStorageStore } from './globalPersistantStore'
 /**
  * This is the main application store.
  * It contains all global state for the entire application.

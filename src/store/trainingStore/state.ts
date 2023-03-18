@@ -1,14 +1,14 @@
 import { computed } from 'easy-peasy';
+import type { TrainingLevels } from '../..//models/trainingLevels';
 import {
-  ConvertStringToKeyHighlightPositions,
-  CharacterEntryMode,
+    CharacterEntryMode,
+    ConvertStringToKeyHighlightPositions,
 } from '../../helpers/convertStringToKeyHighlightPositions';
 import {
-  ConvertStringToKeyHighlightPositionsLite,
+    ConvertStringToKeyHighlightPositionsLite,
 } from '../../helpers/convertStringToKeyHighlightPositionsCharachorderLite';
-import { defaultTrainingSettings, defaultAlphabeticTestTraining } from '../../models/trainingSettingsStateModel';
+import { defaultAlphabeticTestTraining } from '../../models/trainingSettingsStateModel';
 import type { TrainingStoreStateModel } from '../../models/trainingStore';
-import type { TrainingLevels } from '../..//models/trainingLevels';
 import { generateNewChordRecordForAllChordsModule } from '../../pages/test/components/EditChordModal';
 
 /**
@@ -35,7 +35,7 @@ const trainingStoreState: TrainingStoreStateModel = {
   allTypedCharactersStore: [],
   trainingLevel: 'CPM' as TrainingLevels,
   moduleCompleteModalToggle: false,
-  downloadModulModalToggle: false,
+  downloadModuleModalToggle: false,
   wasModuleShown: false,
   moduleNumber: 1,
   trainingStatistics: {
@@ -44,7 +44,7 @@ const trainingStoreState: TrainingStoreStateModel = {
   currentLevel: 0,
   timeAtTrainingStart: 0,
   numberOfChordsForTrainingLevel: 0,
-  testTeirHighestWPM: 0,
+  testTierHighestWPM: 0,
   storedChordsRepresentation: generateNewChordRecordForAllChordsModule(JSON?.parse(localStorage?.getItem('chordsReadFromDevice'))),
   // * Computed State
   currentlyHighlightedKeys: computed((state) => {

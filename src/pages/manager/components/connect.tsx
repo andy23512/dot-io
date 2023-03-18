@@ -1,19 +1,16 @@
 import React, { ReactElement } from 'react';
+import { getCount } from '../../manager/components/countChords';
+import { getId } from '../components/getID';
 import {
-  MainControls,
-  sendCommandString, 
-  selectBase, 
-  selectConfig,
-} from '../controls/mainControls'
-import {getId} from '../components/getID'
-import {getCount} from '../../manager/components/countChords'
+    MainControls
+} from '../controls/mainControls';
 
 
 export async function startSerialConnection() {
     console.log("startSerialConnection()");
     try {
       // Prompt user to select any serial port.
-      
+
       MainControls.serialPort = await navigator?.serial?.requestPort();
       console.log("requestPort()");
       // Wait for the serial port to open.
@@ -25,15 +22,15 @@ export async function startSerialConnection() {
     } catch(error) {
       console.log(error);
 
-      
+
       const element: HTMLInputElement = document?.getElementById("statusDiv") as HTMLInputElement;; //.innerHTML = "status: opened serial port";
       if(element !=null){
       element.innerHTML = "status: failed to open serial port; may already be open elsewhere";
       }
 
-     
+
     }
-  
+
   }
 
   async function openSerialPort(){
@@ -53,7 +50,7 @@ export async function startSerialConnection() {
 
   async function setupLineReader(){
     if(MainControls.serialPort){
-      console.log('setupLineRader()');
+      console.log('setupLineReader()');
       const decoder = new TextDecoderStream();
 
       //preventAbort:true,
@@ -64,7 +61,7 @@ export async function startSerialConnection() {
         MainControls.abortController1 = new AbortController();
         MainControls.lineReaderDone = MainControls.serialPort.readable.pipeTo(decoder.writable, {signal:MainControls.abortController1.signal});
 
-    
+
       const inputStream = decoder.readable.pipeThrough(
         new TransformStream(new LineBreakTransformer())
       );
@@ -75,7 +72,7 @@ export async function startSerialConnection() {
       if(element !=null){
       element.innerHTML = "status: opened serial port and listening";
       }
-      
+
     }else{
       console.log('serial port is not open yet');
     }
@@ -87,14 +84,14 @@ export async function startSerialConnection() {
     constructor() {
       this.chunks = '';
     }
-  
+
     transform(chunk: any, controller: any) {
       this.chunks += chunk;
       const lines = this.chunks.split('\r\n');
       this.chunks = lines.pop();
       lines.forEach((line:any) => controller.enqueue(line));
     }
-  
+
     flush(controller: any) {
       controller.enqueue(this.chunks);
     }
@@ -102,7 +99,7 @@ export async function startSerialConnection() {
 
 
 
-  
+
 
 
   async function setCharaChorderToTypicalFunctionality(){
@@ -118,7 +115,7 @@ export async function startSerialConnection() {
 
      const manager: HTMLElement = document.getElementById("manager") as HTMLElement;
      manager.classList.add("connected");
-  
+
 
   }
 
@@ -134,7 +131,7 @@ export async function startSerialConnection() {
 
     //const manager: HTMLElement = document.getElementById("manager") as HTMLElement;
     //manager.classList.add("connected");
- 
+
 
  }
   export function ConnectButton(): ReactElement {
@@ -146,12 +143,11 @@ export async function startSerialConnection() {
       <button
       className="connect sc-bYwzuL text-white rounded p-2 mb-4 inline-block ml-2 bg-[#333] hover:bg-[#3b3b3b] active:bg-[#222] position-relative"
       color="pink"
-      
+
       onClick={() => allFunc()}
       >Connect </button>
 
-   
+
       </React.Fragment>
     );
   }
-  

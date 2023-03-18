@@ -1,8 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react';
-import { FixedSizeList } from 'react-window';
-import type { ChordStatistics } from '../../../models/trainingStatistics';
 import styled from 'styled-components';
-import { useStoreState, useStoreActions } from '../../../store/store';
+import { useStoreActions, useStoreState } from '../../../store/store';
 
 
 
@@ -14,7 +12,7 @@ function TrainingControls(): ReactElement {
   ).statistics.sort((a  : any, b  : any) => b.averageSpeed - a.averageSpeed);
 
   return (
-    
+
     <React.Fragment>
     <AggregateRow data = {stats}/>
     </React.Fragment>
@@ -37,7 +35,7 @@ const AggregateRow = ({ data } : { data: any }) => {
   const currentTrainingScenario = useStoreState((store) => store.currentTrainingScenario,);
 
   const setTrainingLevel = useStoreActions((store) => store.setTrainingLevel,);
-  const maxWPM = useStoreState((store) => store.fastestRecordedWordsPerMinute,); 
+  const maxWPM = useStoreState((store) => store.fastestRecordedWordsPerMinute,);
   const setIsDisplayingIntroductionModal = useStoreActions((store) => store.setIsDisplayingIntroductionModal,);
 
 
@@ -67,12 +65,12 @@ useEffect(() => {
   const temp = parseInt(sessionStorage.getItem("tempTestDeIncrement"))
   if(tempCounter == -100){
     setTempCounter(temp);
-    sessionStorage.getItem("CutomTierTestValue")
+    sessionStorage.getItem("CustomTierTestValue")
   }
 
   if(currentTrainingScenario == 'CUSTOMTIER'){
 
-    if((sumOccurrences+1>=parseInt(sessionStorage.getItem("CutomTierTestValue")))){
+    if((sumOccurrences+1>=parseInt(sessionStorage.getItem("CustomTierTestValue")))){
     setIsDisplaying(true); //Set the testcomplete page variable to true which fires the completed page
     setPopUpDisplayValue(true);
     setTempCounter(-100);
@@ -90,10 +88,10 @@ useEffect(() => {
   //The logic below controls if the CHM tier is slides are triggers
 
   /* eslint-disable */
-  const canCHMTierBeUnlocked =  (parseInt(Math.max.apply(Math, Object.values(maxWPM))?.toFixed()) * 5) > 200; 
+  const canCHMTierBeUnlocked =  (parseInt(Math.max.apply(Math, Object.values(maxWPM))?.toFixed()) * 5) > 200;
    /* eslint-enable */
 
-   
+
   //console.log('Trigger for CHM tier '+ Math.max.apply(Math, Object.values(maxWPM))?.toFixed() + ' '+ canCHMTierBeUnlocked + ' '+    JSON.parse(localStorage.getItem("FirstTimeEnteringCHMTier")));
 
   if(canCHMTierBeUnlocked && JSON.parse(localStorage.getItem("FirstTimeEnteringCHMTier") == null)) {
@@ -103,12 +101,12 @@ useEffect(() => {
    LearnPageFunction('LEXICAL')
    console.log('Trigger for CHM tier')
   }
-  
+
 }, [sumOccurrences, setIsDisplaying]); // <-- dependency array
 
   return (
       <React.Fragment>
-        
+
     </React.Fragment>
   );
 };
@@ -126,16 +124,16 @@ float-left
 const RowStatItem = styled.button.attrs({
   className: `
   hover:color-[#1e90ff]
-  whitespace-nowrap 
-  text-sm w-1/4 
+  whitespace-nowrap
+  text-sm w-1/4
   font-semibold`,
 })``;
 
 const RowStatItemName = styled.button.attrs({
   className: `
   float-left
-  whitespace-nowrap 
-  text-sm w-1/4 
+  whitespace-nowrap
+  text-sm w-1/4
   font-semibold`,
 })``;
 

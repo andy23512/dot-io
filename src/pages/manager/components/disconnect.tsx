@@ -1,6 +1,6 @@
 import React, { ReactElement } from 'react';
-import {MainControls} from '../controls/mainControls'
-import {resetDataTable} from '../../manager/components/resetDataTable'
+import { resetDataTable } from '../../manager/components/resetDataTable';
+import { MainControls } from '../controls/mainControls';
 
 
   export async function disconnectSerialConnection(){
@@ -12,7 +12,7 @@ import {resetDataTable} from '../../manager/components/resetDataTable'
       MainControls.lineReader.releaseLock();
       console.log(MainControls.serialPort.readable);
       await MainControls.abortController1.abort();
-      await MainControls.lineReaderDone.catch(() => { /* Ingore the error */});
+      await MainControls.lineReaderDone.catch(() => { /* Ignore the error */});
       await MainControls.serialPort.close();
       MainControls.abortController1 = new AbortController();
 

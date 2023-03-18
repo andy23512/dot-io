@@ -1,6 +1,6 @@
-import React, { Component } from "react";
-import { getAverageWPM, getHighestWPM, getChordsMastered, getChordsPerMinute } from '../../manager/components/chordGraphs';
+import React from "react";
 import styled from 'styled-components';
+import { getAverageWPM, getChordsMastered, getChordsPerMinute, getHighestWPM } from '../../manager/components/chordGraphs';
 
 const triggerResize = () => {
   // This is done to make sure that the popover elements are in the correct position
@@ -14,7 +14,7 @@ function getCurrentDate(){
   const month = dateObj.getUTCMonth() + 1; //months from 1-12
   const day = dateObj.getUTCDate();
   const year = dateObj.getUTCFullYear();
-  
+
   const newdate = month + "/" + day + "/" + year;
   return newdate;
 }
@@ -24,7 +24,7 @@ function convertDate(date : Date){
   const month = dateObj.getMonth() + 1; //months from 1-12
   const day = dateObj.getUTCDate();
   const year = dateObj.getUTCFullYear();
-  
+
   const newdate = month + "/" + day + "/" + year;
   return newdate;
 }
@@ -58,11 +58,11 @@ function dateRangeCheck(from:string, to: string,check: string) {
 
 export default class CardData extends React.Component {
 
-  
+
     state = {
       seenGoalTable: false
       };
-    
+
       togglePop = () => {
         this.setState({
           seenGoalTable: !this.state.seenGoalTable
@@ -70,10 +70,10 @@ export default class CardData extends React.Component {
       };
   render() {
     return (
-      <React.Fragment> 
-        
+      <React.Fragment>
+
            <table style={{borderTopLeftRadius: "5px", borderTopRightRadius: "5px", backgroundColor:"#333", color:"white", height:"60px"}}>
-           
+
       <colgroup span={2}/>
       <colgroup span={2}/>
       <tr style={sd}>
@@ -82,9 +82,9 @@ export default class CardData extends React.Component {
         <th colSpan={2} scope="colgroup">aWPM<div>{getAverageWPM()}</div></th>
         <th colSpan={2} scope="colgroup">ChM<div>{getChordsMastered()}</div></th>
         <th colSpan={2} scope="colgroup">aCPM<div>{getChordsPerMinute()}</div></th>
-    
+
       </tr>
-      <tr style={this.state.seenGoalTable ? {display:""}:{display:"none"}}> 
+      <tr style={this.state.seenGoalTable ? {display:""}:{display:"none"}}>
         <th scope="col">Goal</th>
         <th scope="col">Actual</th>
         <th scope="col">Goal</th>
@@ -263,8 +263,8 @@ if (ifStatementSecondGoalValue != null) {
   const currentDate = new Date();
   const date1 = new Date(firstVal);
   const date2 = new Date(currentDate);
-  let tempHighestRetunVal =0;
-  
+  let tempHighestReturnVal =0;
+
   // To calculate the time difference of two dates
   const Difference_In_Time = date2.getTime() - date1.getTime();
   // To calculate the no. of days between two dates
@@ -294,24 +294,24 @@ if (ifStatementSecondGoalValue != null) {
        if(dateRangeCheck(firstNum, secondNum, tempConvertedDate)) {
         //console.log('I made it to the if');
        //  console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
-      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]); 
+      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]);
       // console.log(JSON.parse(localStorage.getItem("storedCharactersPerMinuteData"))[i])
       const tempInHighestVal = JSON.parse(localStorage.getItem("wpmGraphWPM"))[i];
       //console.log('In if '+ tempInHighestVal);
-      tempHighestRetunVal = ((tempHighestRetunVal == null) || (tempInHighestVal > tempHighestRetunVal)) ? tempInHighestVal : tempHighestRetunVal;
-        //return tempHighestRetunVal;
-        //console.log(tempHighestRetunVal);
+      tempHighestReturnVal = ((tempHighestReturnVal == null) || (tempInHighestVal > tempHighestReturnVal)) ? tempInHighestVal : tempHighestReturnVal;
+        //return tempHighestReturnVal;
+        //console.log(tempHighestReturnVal);
         //console.log('Idk if i made it here or not isl')
        }
 
-      // return tempHighestRetunVal;
-      
-      } 
-      //console.log((tempHighestRetunVal == 'undefined') ? tempHighestRetunVal:'-' );
+      // return tempHighestReturnVal;
+
+      }
+      //console.log((tempHighestReturnVal == 'undefined') ? tempHighestReturnVal:'-' );
        //console.log('I think I made it to the return');
-       //console.log(tempHighestRetunVal);
-       return (tempHighestRetunVal == 'undefined') ?  '-' : tempHighestRetunVal;
-    
+       //console.log(tempHighestReturnVal);
+       return (tempHighestReturnVal == 'undefined') ?  '-' : tempHighestReturnVal;
+
     } else if(getHighestWPM()<JSON.parse(localStorage.getItem("storedGoalWPM"))[secondArrayNum]){
       for(let i =0; i<parseInt(JSON.parse(localStorage.getItem("wpmGraphDate"))[JSON.parse(localStorage.getItem("wpmGraphDate")).length-1]); i++  ){
         //console.log("DId I enter the third one")
@@ -321,7 +321,7 @@ if (ifStatementSecondGoalValue != null) {
         // console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
         return JSON.parse(localStorage.getItem("wpmGraphWPM"))[i];
        }
-      } 
+      }
     }
 
     }
@@ -360,8 +360,8 @@ if (ifStatementSecondGoalValue != null) {
   const currentDate = new Date();
   const date1 = new Date(firstVal);
   const date2 = new Date(currentDate);
-  let tempHighestRetunVal =0;
-  
+  let tempHighestReturnVal =0;
+
   // To calculate the time difference of two dates
   const Difference_In_Time = date2.getTime() - date1.getTime();
   // To calculate the no. of days between two dates
@@ -391,24 +391,24 @@ if (ifStatementSecondGoalValue != null) {
        if(dateRangeCheck(firstNum, secondNum, tempConvertedDate)) {
         //console.log('I made it to the if');
        //  console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
-      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]); 
+      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]);
       // console.log(JSON.parse(localStorage.getItem("storedCharactersPerMinuteData"))[i])
       const tempInHighestVal = JSON.parse(localStorage.getItem("storedMasterData"))[i];
       //console.log('In if '+ tempInHighestVal);
-      tempHighestRetunVal = ((tempHighestRetunVal == null) || (tempInHighestVal > tempHighestRetunVal)) ? tempInHighestVal : tempHighestRetunVal;
-        //return tempHighestRetunVal;
-        //console.log(tempHighestRetunVal);
+      tempHighestReturnVal = ((tempHighestReturnVal == null) || (tempInHighestVal > tempHighestReturnVal)) ? tempInHighestVal : tempHighestReturnVal;
+        //return tempHighestReturnVal;
+        //console.log(tempHighestReturnVal);
         //console.log('Idk if i made it here or not isl')
        }
 
-      // return tempHighestRetunVal;
-      
-      } 
-      //console.log((tempHighestRetunVal == 'undefined') ? tempHighestRetunVal:'-' );
+      // return tempHighestReturnVal;
+
+      }
+      //console.log((tempHighestReturnVal == 'undefined') ? tempHighestReturnVal:'-' );
        //console.log('I think I made it to the return');
-       //console.log(tempHighestRetunVal);
-       return (tempHighestRetunVal == 'undefined') ?  '-' : tempHighestRetunVal;
-    
+       //console.log(tempHighestReturnVal);
+       return (tempHighestReturnVal == 'undefined') ?  '-' : tempHighestReturnVal;
+
     } else if(getHighestWPM()<JSON.parse(localStorage.getItem("storedGoalChM"))[secondArrayNum]){
       for(let i =0; i<parseInt(JSON.parse(localStorage.getItem("storedMasterDate"))[JSON.parse(localStorage.getItem("storedMasterDate")).length-1]); i++  ){
         //console.log("DId I enter the third one")
@@ -418,7 +418,7 @@ if (ifStatementSecondGoalValue != null) {
         // console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
         return JSON.parse(localStorage.getItem("storedMasterData"))[i];
        }
-      } 
+      }
     }
 
     }
@@ -458,8 +458,8 @@ if (ifStatementSecondGoalValue != null) {
   const currentDate = new Date();
   const date1 = new Date(firstVal);
   const date2 = new Date(currentDate);
-  let tempHighestRetunVal =0;
-  
+  let tempHighestReturnVal =0;
+
   // To calculate the time difference of two dates
   const Difference_In_Time = date2.getTime() - date1.getTime();
   // To calculate the no. of days between two dates
@@ -489,23 +489,23 @@ if (ifStatementSecondGoalValue != null) {
        if(dateRangeCheck(firstNum, secondNum, tempConvertedDate)) {
         //console.log('I made it to the if');
        //  console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
-      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]); 
+      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]);
       // console.log(JSON.parse(localStorage.getItem("storedCharactersPerMinuteData"))[i])
       const tempInHighestVal = JSON.parse(localStorage.getItem("storedCharactersPerMinuteData"))[i];
       //console.log('In if '+ tempInHighestVal);
-      tempHighestRetunVal = ((tempHighestRetunVal == null) || (tempInHighestVal > tempHighestRetunVal)) ? tempInHighestVal : tempHighestRetunVal;
-        //return tempHighestRetunVal;
-        //console.log(tempHighestRetunVal);
+      tempHighestReturnVal = ((tempHighestReturnVal == null) || (tempInHighestVal > tempHighestReturnVal)) ? tempInHighestVal : tempHighestReturnVal;
+        //return tempHighestReturnVal;
+        //console.log(tempHighestReturnVal);
         //console.log('Idk if i made it here or not isl')
-     
+
        }
-       
-      // return tempHighestRetunVal;
-      } 
-     // console.log((tempHighestRetunVal == 'undefined') ? tempHighestRetunVal:'-' );
+
+      // return tempHighestReturnVal;
+      }
+     // console.log((tempHighestReturnVal == 'undefined') ? tempHighestReturnVal:'-' );
        //console.log('I think I made it to the return');
-       return (tempHighestRetunVal == 'undefined') ?  '-' : tempHighestRetunVal;
-    
+       return (tempHighestReturnVal == 'undefined') ?  '-' : tempHighestReturnVal;
+
     } else if(getHighestWPM()<JSON.parse(localStorage.getItem("storedGoalWPM"))[secondArrayNum]){
       for(let i =0; i<parseInt(JSON.parse(localStorage.getItem("wpmGraphDate"))[JSON.parse(localStorage.getItem("wpmGraphDate")).length-1]); i++  ){
         //console.log("DId I enter the third one")
@@ -515,7 +515,7 @@ if (ifStatementSecondGoalValue != null) {
         // console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
         return JSON.parse(localStorage.getItem("wpmGraphWPM"))[i];
        }
-      } 
+      }
     }
     }
     else {
@@ -553,8 +553,8 @@ if (ifStatementSecondGoalValue != null) {
   const currentDate = new Date();
   const date1 = new Date(firstVal);
   const date2 = new Date(currentDate);
-  let tempHighestRetunVal =0;
-  
+  let tempHighestReturnVal =0;
+
   // To calculate the time difference of two dates
   const Difference_In_Time = date2.getTime() - date1.getTime();
   // To calculate the no. of days between two dates
@@ -583,22 +583,22 @@ if (ifStatementSecondGoalValue != null) {
        if(dateRangeCheck(firstNum, secondNum, tempConvertedDate)) {
         //console.log('I made it to the if');
        //  console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
-      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]); 
+      //  console.log('I returned this value' + JSON.parse(localStorage.getItem("wpmGraphWPM"))[i+1]);
       // console.log(JSON.parse(localStorage.getItem("storedCharactersPerMinuteData"))[i])
       const tempInHighestVal = JSON.parse(localStorage.getItem("avgGraphWPM"))[i];
       //console.log('In if '+ tempInHighestVal);
-      tempHighestRetunVal = ((tempHighestRetunVal == null) || (tempInHighestVal > tempHighestRetunVal)) ? tempInHighestVal : tempHighestRetunVal;
-        //return tempHighestRetunVal;
-        //console.log(tempHighestRetunVal);
+      tempHighestReturnVal = ((tempHighestReturnVal == null) || (tempInHighestVal > tempHighestReturnVal)) ? tempInHighestVal : tempHighestReturnVal;
+        //return tempHighestReturnVal;
+        //console.log(tempHighestReturnVal);
         //console.log('Idk if i made it here or not isl')
        }
-       
-      // return tempHighestRetunVal;
-      } 
-      //console.log((tempHighestRetunVal == 'undefined') ? tempHighestRetunVal:'-' );
+
+      // return tempHighestReturnVal;
+      }
+      //console.log((tempHighestReturnVal == 'undefined') ? tempHighestReturnVal:'-' );
        //console.log('I think I made it to the return');
-       return (tempHighestRetunVal == 'undefined') ?  '-' : tempHighestRetunVal;
-    
+       return (tempHighestReturnVal == 'undefined') ?  '-' : tempHighestReturnVal;
+
     } else if(getHighestWPM()<JSON.parse(localStorage.getItem("storedGoalAWPM"))[secondArrayNum]){
       for(let i =0; i<parseInt(JSON.parse(localStorage.getItem("avgGraphDate"))[JSON.parse(localStorage.getItem("avgGraphDate")).length-1]); i++  ){
         //console.log("DId I enter the third one")
@@ -608,7 +608,7 @@ if (ifStatementSecondGoalValue != null) {
         // console.log(JSON.parse(localStorage.getItem("wpmGraphWPM"))[i]);
         return JSON.parse(localStorage.getItem("avgGraphWPM"))[i];
        }
-      } 
+      }
     }
     }
     else {
@@ -624,7 +624,7 @@ function testFunc (inDaysNumber : number, firstArrayNum : number, secondArrayNum
   const date1 = new Date(firstNum);
   const date2 = new Date(secondNum);
   const currentDate = new Date();
-    
+
   // To calculate the time difference of two dates
   const Difference_In_Time = date2.getTime() - date1.getTime();
   // To calculate the no. of days between two dates
@@ -640,7 +640,7 @@ function testFunc (inDaysNumber : number, firstArrayNum : number, secondArrayNum
 export const PracticeStreak = styled.button.attrs({
     className: `text-white rounded p-2 mb-4 inline-block ml-2 bg-green-500`,
   })``;
-  
+
         const tableText = {
           textAlign: "center" as const
         }
@@ -648,22 +648,22 @@ export const PracticeStreak = styled.button.attrs({
             fontFamily: "ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont"
         }
         const resetGoalButtonStyleActive = {
-        position:"absolute" as const, 
-        marginLeft:"50px" as const, 
+        position:"absolute" as const,
+        marginLeft:"50px" as const,
         marginTop:"15px" as const,
         display:"" as const
-        
+
       };
         const resetGoalButtonStyleInactive = {
-          position:"absolute" as const, 
-          marginLeft:"50px" as const, 
+          position:"absolute" as const,
+          marginLeft:"50px" as const,
           marginTop:"15px" as const,
           display:"none" as const
         };
 
         const here = {
-          position: "absolute" as const, 
-    zIndex: "1" as const, 
+          position: "absolute" as const,
+    zIndex: "1" as const,
     top: "45%" as const,
     left: "22.5%" as const,
     width: "50%" as const,

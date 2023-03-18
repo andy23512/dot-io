@@ -1,6 +1,6 @@
-import type { GlobalStore } from "../../../src/models/globalStorage";
-import globalStoreState from "./state";
+import type { GlobalStore } from "../../models/globalStorage";
 import globalStorageStoreActions from "./actions";
+import globalStoreState from "./state";
 
 
 /**

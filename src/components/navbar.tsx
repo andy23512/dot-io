@@ -1,21 +1,21 @@
-import React, { ReactElement } from 'react';
+import { useStoreActions, useStoreState } from 'easy-peasy';
+import { ReactElement } from 'react';
+import { FaBars } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import DumbellImage from '../assets/Dumbell.png';
+import type { TrainingLevels } from '../../src/models/trainingLevels';
+import InfoIcon from '../../src/pages/test/components/InfoIcon';
+import LockIconWhite from '../../src/pages/test/components/LockIconWhite';
 import BooksImage from '../assets/Books.png';
-import profileImage from '../assets/profile.png';
-import { ROUTER_PATHS } from './router';
-import {FaBars} from 'react-icons/fa'
-import { useStoreActions, useStoreState } from 'easy-peasy';
 import CM_Icon from '../assets/CM_icon.png';
 import CPM_Icon from '../assets/CPM_icon.png';
 import Crown_Icon from '../assets/Crown_icon.png';
+import DumbellImage from '../assets/Dumbell.png';
 import StM_Icon from '../assets/StM.png';
+import profileImage from '../assets/profile.png';
 import tWPM_Icon from '../assets/tWPM.png';
-import LockIconWhite from '../../src/pages/test/components/LockIconWhite';
+import { ROUTER_PATHS } from './router';
 import { ScoresComponent } from './scoresComponent';
-import InfoIcon from '../../src/pages/test/components/InfoIcon';
-import type { TrainingLevels } from '../../src/models/trainingLevels';
 
 
 
@@ -29,7 +29,7 @@ const beginTraining = useStoreActions((store: any) => store.beginTrainingMode);
 const setIsDisplayingIntroductionModal = useStoreActions((store : any) => store.setIsDisplayingIntroductionModal);
 const setTrainingLevel = useStoreActions((store : any) => store.setTrainingLevel);
 /* eslint-disable */
-const maxWPM = useStoreState((store) => (parseInt(Math.max.apply(Math, Object.values(store.fastestRecordedWordsPerMinute))?.toFixed()) * 5) > 200); 
+const maxWPM = useStoreState((store) => (parseInt(Math.max.apply(Math, Object.values(store.fastestRecordedWordsPerMinute))?.toFixed()) * 5) > 200);
 /* eslint-enable */
 const stable = true;
 
@@ -75,31 +75,31 @@ const stable = true;
         <div className='text-white font-mono'>CPM</div>
         <NavLinksImage open = {true} src={CPM_Icon} alt=""  onClick={()=>TrainingPageFunction('CPM', true)}/>
         </NavMenuLink>
-        <NavMenuLink aria-current="page">        
+        <NavMenuLink aria-current="page">
         <div className='text-white font-mono'>{maxWPM ? 'ChM' : <LockIconStyle><LockIconWhite/></LockIconStyle>}</div>
         <NavLinksImage open = {maxWPM} src={BooksImage} alt="" onClick={()=>TrainingPageFunction('CHM', maxWPM)}/>
         </NavMenuLink>
         <NavMenuLink aria-current="page">
         <LockIconStyle>
-        <LockIconWhite/>        
-        </LockIconStyle>        
+        <LockIconWhite/>
+        </LockIconStyle>
         <NavLinksImage open = {false} src={DumbellImage} alt=""/>
         </NavMenuLink>
         <NavMenuLink aria-current="page">
         <LockIconStyle>
-        <LockIconWhite/>        
-        </LockIconStyle>        
+        <LockIconWhite/>
+        </LockIconStyle>
         <NavLinksImage open = {false} src={StM_Icon} alt="" />
         </NavMenuLink>
         <NavMenuLink  aria-current="page">
         <LockIconStyle>
-        <LockIconWhite/>        
-        </LockIconStyle>        
+        <LockIconWhite/>
+        </LockIconStyle>
         <NavLinksImage open = {false} src={tWPM_Icon} alt="" />
         </NavMenuLink>
         <NavMenuLink aria-current="page">
         <LockIconStyle>
-        <LockIconWhite/>        
+        <LockIconWhite/>
         </LockIconStyle>
         <NavLinksImage open = {false} src={CM_Icon} alt="" />
         </NavMenuLink>
@@ -117,7 +117,7 @@ const stable = true;
         <button onClick={() => setIsDisplayingIntroductionModal(true)}>
         <InfoIcon/>
         </button>
-        
+
     </NavbarContainer>
     </NavI>
   );
@@ -194,7 +194,7 @@ display: none;
 const NavMenu = styled.ul `
 display: flex;
 align-items: center;
-list-style: none; 
+list-style: none;
 text-align: center;
 margin-left: 150px;
 
@@ -203,7 +203,7 @@ margin-left: 150px;
 }
 `;
 
-const NavLinksImage = styled.img <{ open: boolean }> ` 
+const NavLinksImage = styled.img <{ open: boolean }> `
 color: #fff;
 display: flex;
 align-items: center;
@@ -222,7 +222,7 @@ font-size: 1.5rem;
 }
 `
 
-const NavLinksImageTransparant = styled.img `
+const NavLinksImageTransparent = styled.img `
 color: #fff;
 display: flex;
 opacity: .5;

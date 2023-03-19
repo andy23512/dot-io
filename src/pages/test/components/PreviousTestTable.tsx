@@ -299,7 +299,7 @@ function returnHeader(tier: string) {
   if (tier == 'CHM') {
     return (
       <React.Fragment>
-        <HeaderItemRow helpText="The type of test associated with these metrics."></HeaderItemRow>
+        <HeaderItemRow helpText="The type of test associated with these metrics." />
         <HeaderItemRow helpText="Your WPM for this test.">
           Accuracy
         </HeaderItemRow>

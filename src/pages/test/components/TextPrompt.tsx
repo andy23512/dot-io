@@ -563,7 +563,7 @@ export function TextPrompt(): ReactElement {
 
   return (
     <React.Fragment>
-      <div className="text-red-500"></div>
+      <div className="text-red-500" />
 
       <TextPromptContainer>
         {textPromptUnFocused ? isFocused() : isFocused()}

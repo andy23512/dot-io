@@ -140,7 +140,7 @@ function ModuleCompleteModal(): ReactElement {
             &times;
           </button>
           <p className="pt-2 m-10 font-bold mr-64">Download Your Chords!</p>
-          <p className=" ml-10 mr-10" id="statusDiv"></p>
+          <p className=" ml-10 mr-10" id="statusDiv" />
           <p className=" ml-10 mr-10 text-white">
             Or press &lsquo;X&rsquo; to continue practicing. Or press
             &lsquo;X&rsquo; to conti.
@@ -154,7 +154,7 @@ function ModuleCompleteModal(): ReactElement {
           <p
             className=" ml-10 mr-10 ml-36"
             id="downloadCompletionPercentage"
-          ></p>
+           />
           <button
             className={`drop-shadow-2xl right-arrow text-white rounded inline-block p-2 ml-48 mt-4 focus bg-[#333] hover:bg-[#3b3b3b] active:bg-[#222] ${
               value == true ? `hidden` : ``

@@ -63,7 +63,7 @@ function ChordTextInput(): ReactElement {
         className={`mb-2 mr-2 text-white font-semibold ${
           !displayHUD && 'hidden'
         }`}
-      ></span>
+       />
 
       <input
         autoCorrect="off"

@@ -1,8 +1,8 @@
-name: Deploy Dev Branch
+name: Deploy web app to Azure Static Web Apps
 on:
   push:
     branches:
-      - Development
+      - latest_branch
 
 permissions:
   issues: write
@@ -18,8 +18,8 @@ jobs:
       - name: Install Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: ${{secrets.AZURESTATICWEBAPPNODEVERSION}}
-          cache: "npm"
+          node-version: 14.17.1
+          cache: 'npm'
       - name: npm install and npm build
         run: |
           npm install
@@ -28,11 +28,8 @@ jobs:
         run: npm run lint
       - name: npm test
         run: npm run test -- --coverage 2>&1 | tee test_run_output.txt
-      - name: Deploy
-        uses: Azure/static-web-apps-deploy@v1
+      - name: Committing changes
+        uses: EndBug/add-and-commit@v7
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURESUBPRODWEBAPPAPITOKEN }}
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          action: "upload"
-          app_location: /build
-          skip_app_build: true
+          author_name: Snowpack Build
+          author_email: actions@github.com

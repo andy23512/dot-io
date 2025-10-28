@@ -17,7 +17,7 @@ export default {
     '@snowpack/plugin-postcss',
     './reload-global-css-after-file-changes.js',
   ],
-  entrypoints: ["react-is"],
+  entrypoints: ['react-is'],
   routes: [
     /* Enable an SPA Fallback in development: */
     // {"match": "routes", "src": ".*", "dest": "/index.html"},
@@ -33,7 +33,10 @@ export default {
     tailwindConfig: './tailwind.config.js',
   },
   buildOptions: {
-    sourcemap: true
+    sourcemap: true,
+    out: 'docs',
+    baseUrl: '/dot-io/',
+    metaUrlPath: 'snowpack',
     /* ... */
   },
 };

@@ -1,0 +1,3 @@
+export const large = "1281px";
+export const extraLarge = "1800px";
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvZG90LWlvL2RvdC1pby9zcmMvaGVscGVycy9icmVha3BvaW50cy50cyJdLAogICJtYXBwaW5ncyI6ICJBQUFPLGFBQU0sUUFBUTtBQUNkLGFBQU0sYUFBYTsiLAogICJuYW1lcyI6IFtdCn0K

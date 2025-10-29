@@ -1,0 +1,11 @@
+const storedChordState = JSON.parse(sessionStorage.getItem("chordingEnabledDevice") || "false");
+const sessionChordingState = sessionStorage.getItem("chordingEnabledDevice");
+const globalStoreState = {
+  isUsingChordingEnabledDevice: false,
+  isDisplayingSettingsModal: false,
+  isDisplayingStatisticsModal: false,
+  isDisplayingIntroductionModal: false,
+  numberOfWordsChorded: 0
+};
+export default globalStoreState;
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvZG90LWlvL2RvdC1pby9zcmMvc3RvcmUvZ2xvYmFsUGVyc2lzdGVudFN0b3JlL3N0YXRlLnRzIl0sCiAgIm1hcHBpbmdzIjogIkFBVUEsTUFBTSxtQkFBNEIsS0FBSyxNQUNyQyxlQUFlLFFBQVEsNEJBQTRCO0FBR3JELE1BQU0sdUJBQXVCLGVBQWUsUUFBUTtBQUVwRCxNQUFNLG1CQUFxQztBQUFBLEVBQ3pDLDhCQUE4QjtBQUFBLEVBQzlCLDJCQUEyQjtBQUFBLEVBQzNCLDZCQUE2QjtBQUFBLEVBQzdCLCtCQUErQjtBQUFBLEVBQy9CLHNCQUFzQjtBQUFBO0FBR3hCLGVBQWU7IiwKICAibmFtZXMiOiBbXQp9Cg==

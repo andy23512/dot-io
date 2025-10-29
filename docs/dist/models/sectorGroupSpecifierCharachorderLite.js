@@ -1,0 +1,95 @@
+import {KeyboardKeysMap, BlankKey} from "./keyboardKeysMap.js";
+export const BlankSectorGroupData = {
+  firstKey: BlankKey,
+  secondKey: BlankKey,
+  thirdKey: BlankKey,
+  fourthKey: BlankKey,
+  fifthKey: BlankKey,
+  sixthKey: BlankKey,
+  seventhKey: BlankKey,
+  eighthKey: BlankKey,
+  ninthKey: BlankKey,
+  tenthKey: BlankKey,
+  eleventhKey: BlankKey,
+  twelfthKey: BlankKey
+};
+export const SectorGroupMapRow = {
+  1: {
+    firstKey: KeyboardKeysMap[41],
+    secondKey: KeyboardKeysMap[55],
+    thirdKey: KeyboardKeysMap[22],
+    fourthKey: KeyboardKeysMap[15],
+    fifthKey: KeyboardKeysMap[14],
+    sixthKey: KeyboardKeysMap[35],
+    seventhKey: KeyboardKeysMap[46],
+    eighthKey: KeyboardKeysMap[8],
+    ninthKey: KeyboardKeysMap[11],
+    tenthKey: KeyboardKeysMap[12],
+    eleventhKey: KeyboardKeysMap[49],
+    twelfthKey: KeyboardKeysMap[27],
+    thirteenthKey: KeyboardKeysMap[27],
+    fourteenthKey: KeyboardKeysMap[27]
+  },
+  2: {
+    firstKey: KeyboardKeysMap[41],
+    secondKey: KeyboardKeysMap[55],
+    thirdKey: KeyboardKeysMap[22],
+    fourthKey: KeyboardKeysMap[15],
+    fifthKey: KeyboardKeysMap[14],
+    sixthKey: KeyboardKeysMap[35],
+    seventhKey: KeyboardKeysMap[46],
+    eighthKey: KeyboardKeysMap[8],
+    ninthKey: KeyboardKeysMap[11],
+    tenthKey: KeyboardKeysMap[12],
+    eleventhKey: KeyboardKeysMap[49],
+    twelfthKey: KeyboardKeysMap[27],
+    thirteenthKey: KeyboardKeysMap[27],
+    fourteenthKey: KeyboardKeysMap[27]
+  },
+  3: {
+    firstKey: KeyboardKeysMap[41],
+    secondKey: KeyboardKeysMap[55],
+    thirdKey: KeyboardKeysMap[22],
+    fourthKey: KeyboardKeysMap[15],
+    fifthKey: KeyboardKeysMap[14],
+    sixthKey: KeyboardKeysMap[35],
+    seventhKey: KeyboardKeysMap[46],
+    eighthKey: KeyboardKeysMap[8],
+    ninthKey: KeyboardKeysMap[11],
+    tenthKey: KeyboardKeysMap[12],
+    eleventhKey: KeyboardKeysMap[49],
+    twelfthKey: KeyboardKeysMap[27],
+    thirteenthKey: KeyboardKeysMap[27]
+  },
+  4: {
+    firstKey: KeyboardKeysMap[41],
+    secondKey: KeyboardKeysMap[55],
+    thirdKey: KeyboardKeysMap[22],
+    fourthKey: KeyboardKeysMap[15],
+    fifthKey: KeyboardKeysMap[14],
+    sixthKey: KeyboardKeysMap[35],
+    seventhKey: KeyboardKeysMap[46],
+    eighthKey: KeyboardKeysMap[8],
+    ninthKey: KeyboardKeysMap[11],
+    tenthKey: KeyboardKeysMap[12],
+    eleventhKey: KeyboardKeysMap[49],
+    twelfthKey: KeyboardKeysMap[27],
+    thirteenthKey: KeyboardKeysMap[27],
+    fourteenthKey: KeyboardKeysMap[27]
+  },
+  5: {
+    firstKey: KeyboardKeysMap[41],
+    secondKey: KeyboardKeysMap[55],
+    thirdKey: KeyboardKeysMap[22],
+    fourthKey: KeyboardKeysMap[15],
+    fifthKey: KeyboardKeysMap[14],
+    sixthKey: KeyboardKeysMap[35],
+    seventhKey: KeyboardKeysMap[46],
+    eighthKey: KeyboardKeysMap[8],
+    ninthKey: KeyboardKeysMap[11],
+    tenthKey: KeyboardKeysMap[12],
+    eleventhKey: KeyboardKeysMap[49],
+    twelfthKey: KeyboardKeysMap[27]
+  }
+};
+//# sourceMappingURL=data:application/json;base64,ewogICJ2ZXJzaW9uIjogMywKICAic291cmNlcyI6IFsiL2hvbWUvcnVubmVyL3dvcmsvZG90LWlvL2RvdC1pby9zcmMvbW9kZWxzL3NlY3Rvckdyb3VwU3BlY2lmaWVyQ2hhcmFjaG9yZGVyTGl0ZS50c3giXSwKICAibWFwcGluZ3MiOiAiQUFBQTtBQU1PLGFBQU0sdUJBQXVCO0FBQUEsRUFDbEMsVUFBVTtBQUFBLEVBQ1YsV0FBVztBQUFBLEVBQ1gsVUFBVTtBQUFBLEVBQ1YsV0FBVztBQUFBLEVBQ1gsVUFBVTtBQUFBLEVBQ1YsVUFBVTtBQUFBLEVBQ1YsWUFBWTtBQUFBLEVBQ1osV0FBVztBQUFBLEVBQ1gsVUFBVTtBQUFBLEVBQ1YsVUFBVTtBQUFBLEVBQ1YsYUFBYTtBQUFBLEVBQ2IsWUFBWTtBQUFBO0FBS1AsYUFBTSxvQkFDWDtBQUFBLEVBQ0UsR0FBRztBQUFBLElBQ0QsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsWUFBWSxnQkFBZ0I7QUFBQSxJQUM1QixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixhQUFhLGdCQUFnQjtBQUFBLElBQzdCLFlBQVksZ0JBQWdCO0FBQUEsSUFDNUIsZUFBZSxnQkFBZ0I7QUFBQSxJQUMvQixlQUFlLGdCQUFnQjtBQUFBO0FBQUEsRUFFakMsR0FBRztBQUFBLElBQ0QsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsWUFBWSxnQkFBZ0I7QUFBQSxJQUM1QixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixhQUFhLGdCQUFnQjtBQUFBLElBQzdCLFlBQVksZ0JBQWdCO0FBQUEsSUFDNUIsZUFBZSxnQkFBZ0I7QUFBQSxJQUMvQixlQUFlLGdCQUFnQjtBQUFBO0FBQUEsRUFFakMsR0FBRztBQUFBLElBQ0QsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsWUFBWSxnQkFBZ0I7QUFBQSxJQUM1QixXQUFXLGdCQUFnQjtBQUFBLElBQzNCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixhQUFhLGdCQUFnQjtBQUFBLElBQzdCLFlBQVksZ0JBQWdCO0FBQUEsSUFDNUIsZUFBZSxnQkFBZ0I7QUFBQTtBQUFBLEVBRWpDLEdBQUc7QUFBQSxJQUNELFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFdBQVcsZ0JBQWdCO0FBQUEsSUFDM0IsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFlBQVksZ0JBQWdCO0FBQUEsSUFDNUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsYUFBYSxnQkFBZ0I7QUFBQSxJQUM3QixZQUFZLGdCQUFnQjtBQUFBLElBQzVCLGVBQWUsZ0JBQWdCO0FBQUEsSUFDL0IsZUFBZSxnQkFBZ0I7QUFBQTtBQUFBLEVBRWpDLEdBQUc7QUFBQSxJQUNELFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFdBQVcsZ0JBQWdCO0FBQUEsSUFDM0IsVUFBVSxnQkFBZ0I7QUFBQSxJQUMxQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFlBQVksZ0JBQWdCO0FBQUEsSUFDNUIsV0FBVyxnQkFBZ0I7QUFBQSxJQUMzQixVQUFVLGdCQUFnQjtBQUFBLElBQzFCLFVBQVUsZ0JBQWdCO0FBQUEsSUFDMUIsYUFBYSxnQkFBZ0I7QUFBQSxJQUM3QixZQUFZLGdCQUFnQjtBQUFBO0FBQUE7IiwKICAibmFtZXMiOiBbXQp9Cg==
